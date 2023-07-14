@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit {
                 // get return url from query parameters or default to home page
                 this.messageService.add({  severity: 'success', summary: 'Login successful' });
                 //const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-                //this.router.navigateByUrl(returnUrl);
+                this.router.navigate(['/profile']);
 
             },
             error: error => {

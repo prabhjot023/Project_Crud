@@ -21,7 +21,7 @@ export const routes: Routes = [
     children: []
   },
   {
-    path:'signup',
+    path:'signup/:id',
     component: SignUpComponent,
     children:[]
 

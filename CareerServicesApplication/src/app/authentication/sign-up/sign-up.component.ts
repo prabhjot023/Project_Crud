@@ -25,11 +25,14 @@ export class SignUpComponent {
   ) { }
 
   ngOnInit() {
+    console.log(this.route.snapshot.params['id']);
     this.form = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       username: ['', Validators.required],
-      password: ['', [Validators.required]]
+      password: ['', [Validators.required]],
+      userType:[this.route.snapshot.params['id']
+        ,Validators.required]
     });
   }
 
@@ -53,7 +56,7 @@ export class SignUpComponent {
         next: () => {
           this.messageService.clear();
           this.messageService.add({ severity: 'success', summary: 'Success' });
-          this.router.navigate(['../login'], { relativeTo: this.route });
+          this.router.navigate(['/'], { relativeTo: this.route });
         },
         error: error => {
           this.messageService.add({  severity: 'warn', summary: 'Please enter details',});

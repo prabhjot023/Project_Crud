@@ -12,7 +12,8 @@ import { FakeBackendInterceptor, fakeBackendProvider } from './_helpers/fake_bac
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+
   ],
   imports: [
     BrowserModule,
