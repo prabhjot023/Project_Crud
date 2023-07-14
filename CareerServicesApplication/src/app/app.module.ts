@@ -7,6 +7,7 @@ import { MessagesModule } from 'primeng/messages';
 import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FakeBackendInterceptor, fakeBackendProvider } from './_helpers/fake_backend';
 
 
 @NgModule({
@@ -23,7 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserAnimationsModule,
 
   ],
-  providers: [],
+  providers: [fakeBackendProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,11 +12,14 @@ import { DividerModule } from 'primeng/divider';
 import { CardModule } from 'primeng/card';
 import { ToastModule } from 'primeng/toast';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { AccountService } from './accountService.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     LoginComponent,
     LandingPageComponent,
     SignUpComponent,
+
 
   ],
   imports: [
@@ -28,9 +31,12 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     ButtonModule,
     CardModule,
     DividerModule,
-    ToastModule
+    ToastModule,
+    HttpClientModule
 
 
-  ]
+
+  ],
+  providers:[AccountService,]
 })
 export class AuthenticationModule { }

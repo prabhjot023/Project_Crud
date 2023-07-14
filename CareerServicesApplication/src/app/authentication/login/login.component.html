@@ -14,11 +14,11 @@
 
 
           <div >
-            <input class="set_input" pInputText type="text"  name="email" />
+            <input class="set_input" pInputText type="text"  formControlName="email" />
 
         </div>
         <div >
-          <p-password name="password" class="set_input">
+          <p-password formControlName="password" class="set_input">
 
             <ng-template pTemplate="footer">
               <p-divider></p-divider>
@@ -34,7 +34,9 @@
         </div>
           <div class="card flex justify-content-center" style="margin-top: 7px;">
             <p-toast></p-toast>
-            <button type="button" pButton pRipple (click)="verify()" label="Submit"></button>
+            <button type="button" pButton pRipple (click)="onSubmit()" label="Submit"></button>
+
+            <a  [routerLink]="['/register']">Register</a>
           </div>
 
 

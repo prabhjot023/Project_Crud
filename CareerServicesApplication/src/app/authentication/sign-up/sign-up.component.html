@@ -1,12 +1,42 @@
-<div class="container-fluid set_alignment">
-
-
-
-<p-card header="Title">
-  <p class="m-0">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed consequuntur error repudiandae numquam deserunt quisquam repellat libero asperiores earum nam nobis, culpa ratione quam perferendis esse, cupiditate neque
-      quas!
-  </p>
-</p-card>
-
+<div class="card">
+  <h4 class="card-header">Register</h4>
+  <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+              <label class="form-label">First Name</label>
+              <input type="text" formControlName="firstName"  class="form-control"  />
+              <div *ngIf="submitted && form.controls['firstName'].invalid" class="invalid-feedback">
+                  <div >First Name is required</div>
+              </div>
+          </div>
+          <div class="mb-3">
+              <label class="form-label">Last Name</label>
+              <input type="text" formControlName="lastName" class="form-control" />
+              <div *ngIf="submitted && form.controls['lastName'].invalid" class="invalid-feedback">
+                  <div >Last Name is required</div>
+              </div>
+          </div>
+          <div class="mb-3">
+              <label class="form-label">Username</label>
+              <input type="text" formControlName="username" class="form-control"  />
+              <div *ngIf="submitted && form.controls['username'].invalid" class="invalid-feedback">
+                  <div >Username is required</div>
+              </div>
+          </div>
+          <div class="mb-3">
+              <label class="form-label">Password</label>
+              <input type="password" formControlName="password" class="form-control"  />
+              <div *ngIf="submitted && form.controls['password'].invalid" class="invalid-feedback">
+                  <div >Password is required</div>
+              </div>
+          </div>
+          <div>
+              <button [disabled]="loading" class="btn btn-primary">
+                  <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+                  Register
+              </button>
+              <a [routerLink]="['/']" class="btn btn-link">Cancel</a>
+          </div>
+      </form>
+  </div>
 </div>

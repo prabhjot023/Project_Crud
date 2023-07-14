@@ -12,12 +12,12 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 export const routes: Routes = [
   {
     path: '',
-    component: LandingPageComponent,
+    component: LoginComponent,
     children: []
   },
   {
-    path: 'login',
-    component: LoginComponent,
+    path: 'register',
+    component: LandingPageComponent,
     children: []
   },
   {
