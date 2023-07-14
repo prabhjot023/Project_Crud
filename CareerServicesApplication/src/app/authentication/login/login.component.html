@@ -34,9 +34,10 @@
         </div>
           <div class="card flex justify-content-center" style="margin-top: 7px;">
             <p-toast></p-toast>
-            <button type="button" pButton pRipple (click)="onSubmit()" label="Submit"></button>
-
-            <a  [routerLink]="['/register']">Register</a>
+            <div class="button-align">
+              <button type="button" pButton pRipple (click)="onSubmit()" label="Submit"></button>
+              <a  [routerLink]="['/register']" style="margin-left:20px; color: #3B82F6; text-decoration: none;">Register</a>
+            </div>
           </div>
 
 
