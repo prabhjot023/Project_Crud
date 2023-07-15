@@ -1,7 +1,3 @@
-*{
-  margin:0px;
-  padding: 0px;
-}
 
 .set_alignment{
   display: flex;
@@ -16,7 +12,13 @@
 .container::-webkit-scrollbar {
   display: none;
 }
-
+.invalid-feedback{
+  font-size: 13px;
+  color: red;
+}
+.textfield{
+  margin-top: 10px;
+}
 
 
 .set_button_align{

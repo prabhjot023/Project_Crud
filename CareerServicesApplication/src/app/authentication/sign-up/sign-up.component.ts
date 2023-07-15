@@ -12,7 +12,7 @@ import { first } from 'rxjs/operators';
   providers: [MessageService]
 })
 export class SignUpComponent {
-  form!: FormGroup;
+ form!: FormGroup;
   loading = false;
   submitted = false;
 
@@ -29,7 +29,7 @@ export class SignUpComponent {
     this.form = this.formBuilder.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      username: ['', Validators.required],
+      username: ['', [Validators.email,Validators.required]],
       password: ['', [Validators.required]],
       userType:[this.route.snapshot.params['id']
         ,Validators.required]
@@ -37,7 +37,6 @@ export class SignUpComponent {
   }
 
   // convenience getter for easy access to form fields
-  get f() { return this.form.controls; }
 
   onSubmit() {
     this.submitted = true;
@@ -59,7 +58,7 @@ export class SignUpComponent {
           this.router.navigate(['/'], { relativeTo: this.route });
         },
         error: error => {
-          this.messageService.add({  severity: 'warn', summary: 'Please enter details',});
+          this.messageService.add({  severity: 'warn', summary: 'This email is already registered, Please Login',});
           this.loading = false;
         }
       });

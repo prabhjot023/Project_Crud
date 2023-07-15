@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -14,6 +14,7 @@ export class AccountService {
 
     apiUrl : "http://localhost:4200"
     }
+
 
     constructor(
         private router: Router,
@@ -36,6 +37,7 @@ export class AccountService {
                 return user;
             }));
     }
+
 
     logout() {
         // remove user from local storage and set current user to null

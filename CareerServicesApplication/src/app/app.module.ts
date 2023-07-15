@@ -8,6 +8,8 @@ import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FakeBackendInterceptor, fakeBackendProvider } from './_helpers/fake_backend';
+import { AccountService } from './authentication/accountService.service';
+import { CommonService } from './common.service';
 
 
 @NgModule({
@@ -25,7 +27,11 @@ import { FakeBackendInterceptor, fakeBackendProvider } from './_helpers/fake_bac
     BrowserAnimationsModule,
 
   ],
-  providers: [fakeBackendProvider],
+  providers: [
+    fakeBackendProvider,
+    CommonService
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -13,11 +13,13 @@
         <form [formGroup]="loginForm" autocomplete="false" name="loginForm">
 
 
-          <div >
+          <div class="textfield">
             <input class="set_input" pInputText type="text"  formControlName="email" />
-
+            <div *ngIf="submitted && loginForm.controls['email'].invalid" class="invalid-feedback">
+              <div >Please enter valid email</div>
+          </div>
         </div>
-        <div >
+        <!-- <div >
           <p-password formControlName="password" class="set_input">
 
             <ng-template pTemplate="footer">
@@ -31,7 +33,14 @@
               </ul>
             </ng-template>
           </p-password>
+        </div> -->
+
+        <div class="textfield">
+          <p-password formControlName="password" [feedback]="false" class="set_input" [toggleMask]="true"></p-password>
+          <div *ngIf="submitted && loginForm.controls['password'].invalid" class="invalid-feedback">
+            <div >Password is required</div>
         </div>
+      </div>
           <div class="card flex justify-content-center" style="margin-top: 7px;">
             <p-toast></p-toast>
             <div class="button-align">

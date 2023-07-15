@@ -4,6 +4,7 @@ import { MessageService } from 'primeng/api';
 import { AccountService } from '../accountService.service';
 import { first } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CommonService } from 'src/app/common.service';
 
 @Component({
   selector: 'app-login',
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
   constructor(public formBuilder : FormBuilder,
     private messageService: MessageService,
     private accountService  : AccountService,
+    public commonService : CommonService,
     private router: Router,
     private route : ActivatedRoute)
   {
@@ -28,10 +30,11 @@ export class LoginComponent implements OnInit {
 
     this.loginForm = this.formBuilder.group({
 
-      'email': [ '', Validators.required],
+      'email': [ '', [Validators.email,Validators.required]],
       'password': ['',Validators.required],
 
     });
+    localStorage.removeItem('user');
   }
 
   verify()
@@ -53,17 +56,24 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
+    //this.commonService.showLoader=true;
     this.accountService.login(this.loginForm.controls['email'].value, this.loginForm.controls['password'].value)
         .pipe(first())
         .subscribe({
             next: () => {
                 // get return url from query parameters or default to home page
+                //this.commonService.showLoader =false;
                 this.messageService.add({  severity: 'success', summary: 'Login successful' });
                 //const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-                this.router.navigate(['/profile']);
+                setTimeout(()=>{
+                  this.router.navigate(['/userProfile']);
+
+                },1500)
 
             },
             error: error => {
+             // this.commonService.showLoader =false;
+
               this.messageService.add({  severity: 'warn', summary: 'Invalid username or password',});
 
                 this.loading = false;
