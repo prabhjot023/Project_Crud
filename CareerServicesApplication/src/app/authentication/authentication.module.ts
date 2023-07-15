@@ -14,11 +14,17 @@ import { ToastModule } from 'primeng/toast';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { AccountService } from './accountService.service';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ResumePageComponent } from './resume-page/resume-page.component';
+import { HomePageComponent } from './home-page/home-page.component';
 @NgModule({
   declarations: [
     LoginComponent,
     LandingPageComponent,
     SignUpComponent,
+    UserProfileComponent,
+    ResumePageComponent,
+    HomePageComponent,
 
 
   ],

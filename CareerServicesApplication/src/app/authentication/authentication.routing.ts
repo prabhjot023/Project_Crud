@@ -6,6 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ResumePageComponent } from './resume-page/resume-page.component';
 
 
 
@@ -23,6 +25,18 @@ export const routes: Routes = [
   {
     path:'signup/:id',
     component: SignUpComponent,
+    children:[]
+
+  },
+  {
+    path:'userProfile',
+    component: UserProfileComponent,
+    children:[]
+
+  },
+  {
+    path:'resume',
+    component: ResumePageComponent,
     children:[]
 
   }
