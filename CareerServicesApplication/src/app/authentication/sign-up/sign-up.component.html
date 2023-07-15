@@ -1,13 +1,12 @@
-
-
-
 <div class="container-fluid set_alignment">
   <p-card header="Register" [style]="{ width: '360px' }">
     <div>
       <div class="col-xs-12">
-        <form [formGroup]="form"  autocomplete="false">
+        <form [formGroup]="form" autocomplete="false">
           <div class="textfield">
-            <label htmlFor="first name">First Name<span style="color: red;">*</span></label>
+            <label htmlFor="first name"
+              >First Name<span style="color: red">*</span></label
+            >
             <input
               type="text"
               pInputText
@@ -16,12 +15,17 @@
               aria-describedby="firtname-help"
               class="set_input"
             />
-            <div *ngIf="submitted && form.controls['firstName'].invalid" class="invalid-feedback">
-                <div >First Name is required</div>
+            <div
+              *ngIf="submitted && form.controls['firstName'].invalid"
+              class="invalid-feedback"
+            >
+              <div>First Name is required</div>
             </div>
           </div>
           <div class="textfield">
-            <label htmlFor="first name">Last Name<span style="color: red;">*</span></label>
+            <label htmlFor="first name"
+              >Last Name<span style="color: red">*</span></label
+            >
             <input
               type="text"
               pInputText
@@ -30,12 +34,17 @@
               aria-describedby="firtname-help"
               class="set_input"
             />
-            <div *ngIf="submitted && form.controls['lastName'].invalid" class="invalid-feedback">
-                <div >Last Name is required</div>
+            <div
+              *ngIf="submitted && form.controls['lastName'].invalid"
+              class="invalid-feedback"
+            >
+              <div>Last Name is required</div>
             </div>
           </div>
           <div class="textfield">
-            <label htmlFor="first name">Email<span style="color: red;">*</span></label>
+            <label htmlFor="first name"
+              >Email<span style="color: red">*</span></label
+            >
             <input
               type="text"
               pInputText
@@ -44,14 +53,23 @@
               aria-describedby="firtname-help"
               class="set_input"
             />
-            <div *ngIf="submitted && form.controls['username'].invalid" class="invalid-feedback">
-                <div >Please enter valid email</div>
+            <div
+              *ngIf="submitted && form.controls['username'].invalid"
+              class="invalid-feedback"
+            >
+              <div>Please enter valid email</div>
             </div>
           </div>
           <div class="textfield">
-            <label htmlFor="first name">Password<span style="color: red;">*</span></label>
+            <label htmlFor="first name"
+              >Password<span style="color: red">*</span></label
+            >
 
-            <p-password formControlName="password" class="set_input" [toggleMask]="true">
+            <p-password
+              formControlName="password"
+              class="set_input"
+              [toggleMask]="true"
+            >
               <ng-template pTemplate="footer">
                 <p-divider></p-divider>
                 <p class="mt-2">Suggestions</p>
@@ -63,21 +81,24 @@
                 </ul>
               </ng-template>
             </p-password>
-            <div *ngIf="submitted && form.controls['password'].invalid" class="invalid-feedback">
-              <div >Password is required</div>
-          </div>
+            <div
+              *ngIf="submitted && form.controls['password'].invalid"
+              class="invalid-feedback"
+            >
+              <div>Password is required</div>
+            </div>
           </div>
           <div class="card flex justify-content-center" style="margin-top: 7px">
+            <div class="button-align">
+              <button
+                pButton
+                pRipple
+                (click)="onSubmit()"
+                label="Submit"
+              ></button>
 
-            <button
-
-              pButton
-              pRipple
-              (click)="onSubmit()"
-              label="Submit"
-            ></button>
-
-            <a [routerLink]="['/']">Cancel</a>
+              <a [routerLink]="['/']" class="secondary-btn">Cancel</a>
+            </div>
             <!-- <a [routerLink]="['/register']"></a> -->
           </div>
           <p-toast></p-toast>
