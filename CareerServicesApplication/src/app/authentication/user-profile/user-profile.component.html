@@ -1,8 +1,5 @@
-
-
-
 <div class="container-fluid set_alignment">
-  <p-card header="Register" [style]="{ width: '360px' }">
+  <p-card header="User Profile" [style]="{ width: '360px' }">
     <div>
       <div class="col-xs-12">
         <form [formGroup]="form"  autocomplete="false">
@@ -45,7 +42,7 @@
               class="set_input"
             />
             <div *ngIf="submitted && form.controls['username'].invalid" class="invalid-feedback">
-                <div >Please enter valid email</div>
+              <div >Please enter valid email</div>
             </div>
           </div>
           <div class="textfield">

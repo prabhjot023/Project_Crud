@@ -115,12 +115,18 @@ export class FakeBackendInterceptor implements HttpInterceptor {
         }
 
         function basicDetails(user: any) {
-            const { id, username, firstName, lastName } = user;
-            return { id, username, firstName, lastName };
+            const { id, username, firstName, lastName ,password , userType} = user;
+            return { id, username, firstName, lastName ,password ,userType};
         }
 
         function isLoggedIn() {
-            return headers.get('Authorization') === 'Bearer fake-jwt-token';
+          if(localStorage.getItem('user'))
+          {
+            return true;
+          }
+          else{
+            return false;
+          }
         }
 
         function idFromUrl() {
