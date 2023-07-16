@@ -7,4 +7,5 @@ import { Component } from '@angular/core';
 })
 export class HomePageComponent {
 
+  array=[1,2,3,4];
 }
