@@ -50,6 +50,10 @@ export class AccountService {
         return this.http.post(`${this.environment.apiUrl}/users/register`, user);
     }
 
+    addResume(user: User) {
+      return this.http.post(`${this.environment.apiUrl}/users/addResume`, user);
+  }
+
     getAll() {
         return this.http.get<User[]>(`${this.environment.apiUrl}/users`);
     }
