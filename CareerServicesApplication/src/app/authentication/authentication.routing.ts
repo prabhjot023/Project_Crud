@@ -8,6 +8,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ResumePageComponent } from './resume-page/resume-page.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 
 
@@ -39,8 +40,13 @@ export const routes: Routes = [
     component: ResumePageComponent,
     children:[]
 
-  }
+  },
+  {
+    path:'homepage',
+    component: HomePageComponent,
+    children:[]
 
+  }
 ];
 
 @NgModule({

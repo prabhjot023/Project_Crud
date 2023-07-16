@@ -26,6 +26,7 @@ import { CommonService } from './common.service';
     InputTextModule,
     BrowserAnimationsModule,
 
+
   ],
   providers: [
     fakeBackendProvider,
