@@ -28,13 +28,24 @@ export class UserProfileComponent {
   ngOnInit() {
 
     this.form = this.formBuilder.group({
-      firstName: [this.loggedInUser.firstName  , Validators.required],
-      lastName: [this.loggedInUser.lastName, Validators.required],
+      firstName: [this.loggedInUser.firstName ? this.loggedInUser.firstName :'' ],
+      lastName: [this.loggedInUser.lastName ? this.loggedInUser.lastName : ''],
+      companyName : [this.loggedInUser.companyName ? this.loggedInUser.companyName : ''],
       username: [this.loggedInUser.username, [Validators.email,Validators.required]],
       password: [this.loggedInUser.password, [Validators.required]],
       userType:[this.loggedInUser.userType
         ,Validators.required]
     });
+    if(this.loggedInUser.userType == 'student')
+    {
+      this.form.controls['fullName'].setValidators(Validators.required);
+      this.form.controls['lastName'].setValidators(Validators.required);
+
+    }
+    else{
+      this.form.controls['companyName'].setValidators(Validators.required);
+
+    }
 
   }
 

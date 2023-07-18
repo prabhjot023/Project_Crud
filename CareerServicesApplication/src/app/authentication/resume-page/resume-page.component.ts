@@ -27,6 +27,7 @@ export class ResumePageComponent implements OnInit {
   public selectedFiles: SelectedFiles[] = [];
   pdfSrc: any;
   elementRef: ElementRef;
+  submitted: boolean;
   constructor(private formBuilder: FormBuilder, private accountService: AccountService,
     private messageService: MessageService,
     private router: Router, private route: ActivatedRoute,
@@ -74,6 +75,7 @@ export class ResumePageComponent implements OnInit {
     });
   }
   save() {
+    this.submitted = true;
     console.log(this.resumeBuilderForm);
 
 
