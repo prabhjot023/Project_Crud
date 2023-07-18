@@ -299,11 +299,11 @@ Please upload your resume
     </h4>
 
     <ng-template pTemplate="footer">
-    <input type="file" pInputText  (change)="onDocumentSelect($event)">
-
+      <input pInputText (change)="onFileSelected($event)" type="file" id="file">
+      <button pButton (click)="displayPdf()" style="margin-top: 10px;">View Resume</button>
     </ng-template>
+
 </p-card>
-
+<p-toast></p-toast>
 </div>
-
 
