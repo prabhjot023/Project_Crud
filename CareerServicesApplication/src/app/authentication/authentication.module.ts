@@ -20,6 +20,7 @@ import { ResumePageComponent } from './resume-page/resume-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { HeaderComponent } from './header/header.component';
 import { TooltipModule } from 'primeng/tooltip';
+import { AddAPostComponent } from './add-apost/add-apost.component';
 @NgModule({
   declarations: [
     LoginComponent,
@@ -29,6 +30,7 @@ import { TooltipModule } from 'primeng/tooltip';
     ResumePageComponent,
     HomePageComponent,
     HeaderComponent,
+    AddAPostComponent,
 
   ],
   imports: [
