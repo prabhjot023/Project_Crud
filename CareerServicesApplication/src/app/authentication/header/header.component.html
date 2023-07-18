@@ -2,16 +2,16 @@
     <img src="../../../assets/logo.jpg" alt="logo" height="75px">
     <ul>
         <li>
-            <a href="" class="selected">Job Postings</a>
+            <a [routerLink]="['/homepage']" class="selected">Job Postings</a>
         </li>
         <li>
-            <a href="">Profile</a>
+            <a [routerLink]="['/userProfile']">Profile</a>
         </li>
         <li>
-            <a href="">Applications</a>
+            <a>Applications</a>
         </li>
         <li>
-            <a href="">Logout</a>
+            <a [routerLink]="['/']">Logout</a>
         </li>
     </ul>
 </nav>
