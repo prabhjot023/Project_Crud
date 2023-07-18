@@ -17,6 +17,8 @@ export class ResumePageComponent implements OnInit {
   loggedInUserResume: any;
   selected: boolean;
   resumeTypeBuild: boolean;
+  submitted: boolean;
+  
   constructor(private formBuilder: FormBuilder,private accountService : AccountService,
     private messageService : MessageService,private router : Router,private route : ActivatedRoute) {
     this.loggedInUser= JSON.parse(localStorage.getItem('user')!) || [];
@@ -61,6 +63,7 @@ export class ResumePageComponent implements OnInit {
     });
   }
   save() {
+    this.submitted = true;
     console.log(this.resumeBuilderForm);
 
 
