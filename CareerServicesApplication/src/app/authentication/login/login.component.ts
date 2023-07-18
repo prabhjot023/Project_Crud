@@ -4,7 +4,6 @@ import { MessageService } from 'primeng/api';
 import { AccountService } from '../accountService.service';
 import { first } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CommonService } from 'src/app/common.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +19,6 @@ export class LoginComponent implements OnInit {
   constructor(public formBuilder : FormBuilder,
     private messageService: MessageService,
     private accountService  : AccountService,
-    public commonService : CommonService,
     private router: Router,
     private route : ActivatedRoute)
   {
@@ -66,7 +64,7 @@ export class LoginComponent implements OnInit {
                 this.messageService.add({  severity: 'success', summary: 'Login successful' });
                 //const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
                 setTimeout(()=>{
-                  this.router.navigate(['/userProfile']);
+                  this.router.navigate(['/homepage']);
 
                 },1500)
 

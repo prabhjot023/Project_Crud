@@ -605,13 +605,19 @@
 </div> -->
 <div class="container-fluid set_alignment" *ngIf="selected && !resumeTypeBuild">
   <p-card [style]="{ width: '360px' }">
+
     <ng-template pTemplate="header">
+      <i
+      class="pi pi-arrow-left "
+      style="font-size: 1.5rem;padding: 20px;cursor: pointer;"
+      (click)="toggle()"
+    ></i>
       <img alt="Card" src="../../../assets/images/resume.svg" />
     </ng-template>
     <h4>Please upload your resume</h4>
 
     <ng-template pTemplate="footer">
-      <input pInputText (change)="onFileSelected($event)" type="file" id="file">
+      <input pInputText (change)="onFileSelected($event)" class="resumeText" type="file" id="file">
       <button pButton (click)="displayPdf()" style="margin-top: 10px;">View Resume</button>
     </ng-template>
 

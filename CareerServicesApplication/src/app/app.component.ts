@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { CommonService } from './common.service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +7,7 @@ import { CommonService } from './common.service';
 })
 export class AppComponent {
   title = 'CareerServicesApplication';
-  constructor(public commonService : CommonService)
+  constructor()
   {
 
   }
