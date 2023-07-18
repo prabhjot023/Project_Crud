@@ -1,5 +1,5 @@
 <app-header></app-header>
-<!-- <div class="container-fluid set_alignment" *ngIf="!selected">
+<div class="container-fluid set_alignment" *ngIf="!selected">
   <p-card [style]="{ width: '360px' }">
     <ng-template pTemplate="header">
       <img alt="Card" src="../../../assets/images/resume.svg" />
@@ -23,10 +23,10 @@
       ></p-button>
     </ng-template>
   </p-card>
-</div> -->
+</div>
 
 <!-- <div class="card" *ngIf="selected && resumeTypeBuild"> -->
-<div class="container-fluid form-align">
+<div class="container-fluid form-align" *ngIf="selected && resumeTypeBuild">
   <p-card header="Build Your Resume" [style]="{ width: '650px' }">
     <i
       class="pi pi-arrow-left abs-icon"
@@ -611,7 +611,11 @@
     <h4>Please upload your resume</h4>
 
     <ng-template pTemplate="footer">
-      <input type="file" pInputText (change)="onDocumentSelect($event)" />
+      <input pInputText (change)="onFileSelected($event)" type="file" id="file">
+      <button pButton (click)="displayPdf()" style="margin-top: 10px;">View Resume</button>
     </ng-template>
-  </p-card>
+
+</p-card>
+<p-toast></p-toast>
 </div>
+
