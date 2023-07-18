@@ -12,12 +12,16 @@
 .container::-webkit-scrollbar {
   display: none;
 }
-.invalid-feedback{
+::ng-deep .invalid-feedback{
+  display: block !important;
   font-size: 13px;
   color: red;
 }
 .textfield{
   margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 
@@ -38,4 +42,7 @@
   margin-left:20px;
   color: #3B82F6;
   text-decoration: none;
+}
+::ng-deep ul{
+  margin-bottom: 0 !important;
 }

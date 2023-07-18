@@ -19,6 +19,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ResumePageComponent } from './resume-page/resume-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { HeaderComponent } from './header/header.component';
+import { TooltipModule } from 'primeng/tooltip';
 @NgModule({
   declarations: [
     LoginComponent,
@@ -28,7 +29,6 @@ import { HeaderComponent } from './header/header.component';
     ResumePageComponent,
     HomePageComponent,
     HeaderComponent,
-
 
   ],
   imports: [
@@ -41,7 +41,8 @@ import { HeaderComponent } from './header/header.component';
     CardModule,
     DividerModule,
     ToastModule,
-    HttpClientModule
+    HttpClientModule,
+    TooltipModule
 
 
 

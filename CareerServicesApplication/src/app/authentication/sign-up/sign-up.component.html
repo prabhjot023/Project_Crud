@@ -3,7 +3,7 @@
     <div>
       <div class="col-xs-12">
         <form [formGroup]="form" autocomplete="false">
-          <div class="textfield">
+          <div class="textfield" *ngIf="userId == 'student'">
             <label htmlFor="first name"
               >First Name<span style="color: red">*</span></label
             >
@@ -22,7 +22,7 @@
               <div>First Name is required</div>
             </div>
           </div>
-          <div class="textfield">
+          <div class="textfield" *ngIf="userId == 'student'">
             <label htmlFor="first name"
               >Last Name<span style="color: red">*</span></label
             >
@@ -39,6 +39,20 @@
               class="invalid-feedback"
             >
               <div>Last Name is required</div>
+            </div>
+          </div>
+          <div class="textfield" *ngIf="userId== 'employer'">
+            <label htmlFor="first name">Company Name<span style="color: red;">*</span></label>
+            <input
+              type="text"
+              pInputText
+              id="comapnyname"
+              formControlName="companyName"
+              aria-describedby="firtname-help"
+              class="set_input"
+            />
+            <div *ngIf="submitted && form.controls['lastName'].invalid" class="invalid-feedback">
+                <div >Company Name is required</div>
             </div>
           </div>
           <div class="textfield">
