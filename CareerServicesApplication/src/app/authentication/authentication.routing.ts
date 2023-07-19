@@ -10,6 +10,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ResumePageComponent } from './resume-page/resume-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AddAPostComponent } from './add-apost/add-apost.component';
+import { ApplicationsComponent } from './applications/applications.component';
 
 
 
@@ -51,6 +52,11 @@ export const routes: Routes = [
   {
     path:'addpost',
     component: AddAPostComponent,
+    children:[],
+  },
+  {
+    path:'applications',
+    component: ApplicationsComponent,
     children:[],
   }
 ];

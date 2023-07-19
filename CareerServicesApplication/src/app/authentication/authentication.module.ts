@@ -21,6 +21,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { HeaderComponent } from './header/header.component';
 import { TooltipModule } from 'primeng/tooltip';
 import { AddAPostComponent } from './add-apost/add-apost.component';
+import { ApplicationsComponent } from './applications/applications.component';
 @NgModule({
   declarations: [
     LoginComponent,
@@ -31,6 +32,7 @@ import { AddAPostComponent } from './add-apost/add-apost.component';
     HomePageComponent,
     HeaderComponent,
     AddAPostComponent,
+    ApplicationsComponent,
 
   ],
   imports: [
