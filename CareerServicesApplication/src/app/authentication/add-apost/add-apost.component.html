@@ -13,118 +13,116 @@
         <form
           novalidate
           (ngSubmit)="save()"
-          [formGroup]="resumeBuilderForm"
+          [formGroup]="addPostForm"
           autocomplete="false"
         >
           <div class="textfield">
-            <label htmlFor="first name" for="firstNameId"
-              >Company<span style="color: red">*</span></label
+            <label
+              >Company Name<span style="color: red">*</span></label
             >
             <input
               type="text"
               pInputText
-              id="firstNameId"
-              formControlName="firstName"
-              aria-describedby="firtname-help"
-              placeholder="First Name"
+              formControlName="companyName"
+
+              placeholder="Company Name"
               class="set_input"
             />
             <div
               *ngIf="
-                submitted && resumeBuilderForm.controls['firstName'].invalid
+                submitted && addPostForm.controls['companyName'].invalid
               "
               class="invalid-feedback"
             >
-              <div>First Name is required</div>
+              <div>Company Name is required</div>
             </div>
           </div>
           <div class="textfield">
-            <label htmlFor="first name" for="lastNameId"
+            <label
               >Job Title<span style="color: red">*</span></label
             >
             <input
               type="text"
               pInputText
-              id="lastNameId"
-              formControlName="lastName"
-              aria-describedby="lastname-help"
-              placeholder="Last Name"
+
+              formControlName="job_title"
+
+              placeholder="Job Title"
               class="set_input"
             />
             <div
               *ngIf="
-                submitted && resumeBuilderForm.controls['lastName'].invalid
+                submitted && addPostForm.controls['job_title'].invalid
               "
               class="invalid-feedback"
             >
-              <div>Last Name is required</div>
+              <div>Job title is required</div>
             </div>
           </div>
           <div class="textfield">
-            <label htmlFor="first name" for="lastNameId"
+            <label
               >Job Description<span style="color: red">*</span></label
             >
             <textarea
               type="text"
               rows="5"
               pInputTextarea
-              id="lastNameId"
-              formControlName="lastName"
-              aria-describedby="lastname-help"
-              placeholder="Last Name"
+
+              formControlName="job_desc"
+
+              placeholder="Job Description"
               class="set_input"
             ></textarea>
             <div
               *ngIf="
-                submitted && resumeBuilderForm.controls['lastName'].invalid
+                submitted && addPostForm.controls['job_desc'].invalid
               "
               class="invalid-feedback"
             >
-              <div>Last Name is required</div>
+              <div>Job Description is required</div>
             </div>
           </div>
           <div class="textfield">
-            <label htmlFor="first name" for="lastNameId"
+            <label
               >Location<span style="color: red">*</span></label
             >
             <input
               type="text"
               pInputText
-              id="lastNameId"
-              formControlName="lastName"
-              aria-describedby="lastname-help"
-              placeholder="Last Name"
+              formControlName="loc"
+
+              placeholder="Location"
               class="set_input"
             />
             <div
               *ngIf="
-                submitted && resumeBuilderForm.controls['lastName'].invalid
+                submitted && addPostForm.controls['loc'].invalid
               "
               class="invalid-feedback"
             >
-              <div>Last Name is required</div>
+              <div>Location is required</div>
             </div>
           </div>
           <div class="textfield">
-            <label htmlFor="first name" for="lastNameId"
+            <label
               >Contact<span style="color: red">*</span></label
             >
             <input
-              type="text"
+              type="number"
               pInputText
-              id="lastNameId"
-              formControlName="lastName"
-              aria-describedby="lastname-help"
-              placeholder="Last Name"
+
+              formControlName="phone"
+
+              placeholder="Phone Number"
               class="set_input"
             />
             <div
               *ngIf="
-                submitted && resumeBuilderForm.controls['lastName'].invalid
+                submitted && addPostForm.controls['phone'].invalid
               "
               class="invalid-feedback"
             >
-              <div>Last Name is required</div>
+              <div>Phone Number is required</div>
             </div>
           </div>
           <button
