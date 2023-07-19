@@ -1,9 +1,9 @@
 <app-header></app-header>
 <div class="content">
-  <div class="cards">
-    <p-card *ngFor="let i of array"
-      header="Advanced Card"
-      subheader="Card Subheader"
+  <div class="cards" >
+    <p-card *ngFor="let i of allposts"
+      header="{{i.job_title}}"
+      subheader="{{i.companyName}}"
       [style]="{ width: '360px', height: '100%' }"
     >
       <ng-template pTemplate="header">
@@ -13,10 +13,7 @@
         />
       </ng-template>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore sed
-        consequuntur error repudiandae numquam deserunt quisquam repellat libero
-        asperiores earum nam nobis, culpa ratione quam perferendis esse,
-        cupiditate neque quas! asd asdas sads asdasd asda asdasd asdasd
+       {{i.job_desc}}
       </p>
       <ng-template pTemplate="footer">
         <p-button label="Apply" icon="pi pi-check" [style]="{ padding: '12px 25px 12px 20px', margin: '0 20px 0 0' }"></p-button>
@@ -25,8 +22,8 @@
       </ng-template>
     </p-card>
   </div>
-  <div class="cards profile-card">
-    <p-card *ngFor="let i of array"
+  <div class="cards profile-card" *ngIf="loggedInUser.userType == 'employer'">
+    <p-card *ngFor="let i of allStudents"
       header="Preet Nanda"
       subheader="Software Developer / UI/UX Designer"
       [style]="{ width: '360px', height: '100%' }"
@@ -48,5 +45,5 @@
       </ng-template>
     </p-card>
   </div>
-  <p-button [routerLink]="['/addpost']" label="Post a Job" class="floating-btn"></p-button>
+  <p-button [routerLink]="['/addpost']" label="Post a Job" class="floating-btn" *ngIf="loggedInUser.userType == 'employer'"></p-button>
 </div>

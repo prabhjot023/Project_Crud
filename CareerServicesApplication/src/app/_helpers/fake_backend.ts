@@ -7,8 +7,11 @@ import { delay, materialize, dematerialize } from 'rxjs/operators';
 const usersKey = 'Users';
 let users: any[] = JSON.parse(localStorage.getItem(usersKey)!) || [];
 const resumeKey = 'Resumes';
+const postKey = 'Posts';
+
 
 let resumes: any[] = JSON.parse(localStorage.getItem(resumeKey)!) || [];
+let posts: any[] = JSON.parse(localStorage.getItem(postKey)!) || [];
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -25,6 +28,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           return register();
         case url.endsWith('/users/addResume') && method === 'POST':
           return addResume();
+        case url.endsWith('/users/addPost') && method === 'POST':
+          return addPost();
         case url.endsWith('/users') && method === 'GET':
           return getUsers();
         case url.match(/\/users\/\d+$/) && method === 'GET':
@@ -64,19 +69,29 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       return ok();
     }
 
+    function addPost() {
+
+
+        let params = body;
+
+          posts.push(params);
+          localStorage.setItem(postKey, JSON.stringify(posts));
+
+        return ok();
+
+    }
     function addResume() {
 
 
       let params = body;
-      if(resumes.find(x => x.id === body.id))
-      {
-      let resume = resumes.find(x => x.id === body.id);
-      Object.assign(resume, params);
-      localStorage.setItem(resumeKey, JSON.stringify(resumes));
+      if (resumes.find(x => x.id === body.id)) {
+        let resume = resumes.find(x => x.id === body.id);
+        Object.assign(resume, params);
+        localStorage.setItem(resumeKey, JSON.stringify(resumes));
       }
-      else{
+      else {
         resumes.push(params);
-      localStorage.setItem(resumeKey, JSON.stringify(resumes));
+        localStorage.setItem(resumeKey, JSON.stringify(resumes));
       }
       return ok();
     }
@@ -136,8 +151,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 
     function basicDetails(user: any) {
-      const { id, username, firstName, lastName, password, userType ,companyName} = user;
-      return { id, username, firstName, lastName, password, userType , companyName};
+      const { id, username, firstName, lastName, password, userType, companyName, companyAddress, companyPhone } = user;
+      return { id, username, firstName, lastName, password, userType, companyName, companyAddress, companyPhone };
     }
 
     function isLoggedIn() {
