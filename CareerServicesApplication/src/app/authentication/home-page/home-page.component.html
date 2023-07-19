@@ -1,6 +1,6 @@
 <app-header></app-header>
 <div class="content">
-  <div class="cards" >
+  <div class="cards" *ngIf="loggedInUser.userType == 'student'">
     <p-card *ngFor="let i of allposts"
       header="{{i.job_title}}"
       subheader="{{i.companyName}}"
@@ -19,6 +19,28 @@
         <p-button label="Apply" icon="pi pi-check" [style]="{ padding: '12px 25px 12px 20px' }"></p-button>
       </ng-template>
     </p-card>
+
+  </div>
+  <div class="cards" *ngIf="loggedInUser.userType == 'employer'">
+    <p-card *ngFor="let i of selectedposts"
+      header="{{i.job_title}}"
+      subheader="{{i.companyName}}"
+      [style]="{ width: '360px', height: '100%' }"
+    >
+      <ng-template pTemplate="header">
+        <img
+          alt="Card"
+          src="https://primefaces.org/cdn/primeng/images/usercard.png"
+        />
+      </ng-template>
+      <p>
+       {{i.job_desc}}
+      </p>
+      <ng-template pTemplate="footer">
+        <p-button label="Apply" icon="pi pi-check" [style]="{ padding: '12px 25px 12px 20px' }"></p-button>
+      </ng-template>
+    </p-card>
+
   </div>
   <div class="cards profile-card" *ngIf="loggedInUser.userType == 'employer'">
     <p-card *ngFor="let i of allStudents"
