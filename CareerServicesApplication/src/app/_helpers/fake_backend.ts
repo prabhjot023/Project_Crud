@@ -32,8 +32,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           return addPost();
         case url.endsWith('/users') && method === 'GET':
           return getUsers();
-        case url.match(/\/users\/\d+$/) && method === 'GET':
-          return getUserById();
+        case url.match(/\/getPost\/\d+$/) && method === 'GET':
+          return getPostById();
         case url.match(/\/users\/\d+$/) && method === 'PUT':
           return updateUser();
         case url.match(/\/users\/\d+$/) && method === 'DELETE':
@@ -72,12 +72,16 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     function addPost() {
 
 
-        let params = body;
+      let params = body;
 
-          posts.push(params);
-          localStorage.setItem(postKey, JSON.stringify(posts));
 
-        return ok();
+      let posts: any[] = JSON.parse(localStorage.getItem(postKey)!) || [];
+
+      params.postId = posts.length ? Math.max(...posts.map(x => x.postId)) + 1 : 1;
+
+      posts.push(params);
+      localStorage.setItem(postKey, JSON.stringify(posts));
+      return ok();
 
     }
     function addResume() {
@@ -100,11 +104,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       return ok(users.map(x => basicDetails(x)));
     }
 
-    function getUserById() {
+    function getPostById() {
       if (!isLoggedIn()) return unauthorized();
+      let posts: any[] = JSON.parse(localStorage.getItem(postKey)!) || [];
 
-      const user = users.find(x => x.id === idFromUrl());
-      return ok(basicDetails(user));
+      const post = posts.find(x => x.postId === idFromUrl());
+      return ok(post);
     }
 
     function updateUser() {
@@ -151,8 +156,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 
     function basicDetails(user: any) {
-      const { id, username, firstName, lastName, password, userType, companyName, companyAddress, companyPhone } = user;
-      return { id, username, firstName, lastName, password, userType, companyName, companyAddress, companyPhone };
+      const { id, username, firstName, lastName, password, userType, companyName, companyAddress, companyPhone, desiredTitle, introduction} = user;
+      return { id, username, firstName, lastName, password, userType, companyName, companyAddress, companyPhone,  desiredTitle, introduction };
     }
 
     function isLoggedIn() {

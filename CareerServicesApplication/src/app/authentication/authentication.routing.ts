@@ -11,6 +11,7 @@ import { ResumePageComponent } from './resume-page/resume-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AddAPostComponent } from './add-apost/add-apost.component';
 import { ApplicationsComponent } from './applications/applications.component';
+import { EditPostComponent } from './edit-post/edit-post.component';
 
 
 
@@ -58,7 +59,13 @@ export const routes: Routes = [
     path:'applications',
     component: ApplicationsComponent,
     children:[],
-  }
+  },
+  {
+    path:'editPost/:id',
+    component: EditPostComponent,
+    children:[]
+
+  },
 ];
 
 @NgModule({

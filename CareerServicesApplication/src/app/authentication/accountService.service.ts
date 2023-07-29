@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { User } from '../../models/user';
+import { MessageService } from 'primeng/api';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -18,7 +19,8 @@ export class AccountService {
 
   constructor(
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private messageService : MessageService
   ) {
     this.userSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('user')!));
     this.user = this.userSubject.asObservable();
@@ -61,7 +63,7 @@ export class AccountService {
   }
 
   getById(id: string) {
-    return this.http.get<User>(`${this.environment.apiUrl}/users/${id}`);
+    return this.http.get(`${this.environment.apiUrl}/getPost/${id}`);
   }
 
   update(id: string, params: any) {
@@ -80,7 +82,31 @@ export class AccountService {
       }));
   }
 
+  updatePost(id: string, params: any) {
 
+        let allposts:any;
+        let flag;
+       allposts = JSON.parse(localStorage.getItem('Posts')!);
+        allposts.forEach((elem:any)=>{
+          if(elem.postId == id)
+        {
+          let posts = allposts.filter((x:any) => x.postId != id);
+          localStorage.removeItem('Posts');
+
+              posts.push(params);
+              localStorage.setItem('Posts', JSON.stringify(posts));
+
+
+          flag = true;
+        }
+        else{
+          flag = false;
+        }
+      });
+
+return flag;
+
+  }
 
   delete(id: string) {
     return this.http.delete(`${this.environment.apiUrl}/users/${id}`)

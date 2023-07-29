@@ -41,7 +41,7 @@ export class SignUpComponent {
     });
     if(this.route.snapshot.params['id'] == 'student')
     {
-      this.form.controls['fullName'].setValidators(Validators.required);
+      this.form.controls['firstName'].setValidators(Validators.required);
       this.form.controls['lastName'].setValidators(Validators.required);
 
     }
