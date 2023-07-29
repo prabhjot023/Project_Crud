@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="container-fluid set_alignment">
-  <p-card header="User Profile" [style]="{ width: '360px' }">
-    <div>
+  <p-card header="User Profile" [style]="{ width: '360px',margin:'20px' }" >
+    <div >
       <div class="col-xs-12">
         <form [formGroup]="form"  autocomplete="false">
           <div class="textfield" *ngIf="loggedInUser.userType == 'student'">
@@ -32,6 +32,36 @@
                 <div >Last Name is required</div>
             </div>
           </div>
+          <div class="textfield" *ngIf="loggedInUser.userType == 'student'">
+            <label htmlFor="first name">Desired job title<span style="color: red;">*</span></label>
+            <input
+              type="text"
+              pInputText
+              id="desiredTitle"
+              formControlName="desiredTitle"
+              aria-describedby="firtname-help"
+              class="set_input"
+            />
+            <div *ngIf="submitted && form.controls['desiredTitle'].invalid" class="invalid-feedback">
+                <div >Desired job title is required</div>
+            </div>
+          </div>
+
+
+          <div class="textfield" *ngIf="loggedInUser.userType == 'student'">
+            <label htmlFor="first name">Introduce yourself<span style="color: red;">*</span></label>
+            <input
+              type="text"
+              pInputText
+              id="introduction"
+              formControlName="introduction"
+              aria-describedby="firtname-help"
+              class="set_input"
+            />
+            <div *ngIf="submitted && form.controls['introduction'].invalid" class="invalid-feedback">
+                <div >Introduction is required</div>
+            </div>
+          </div>
           <div class="textfield" *ngIf="loggedInUser.userType == 'employer'">
             <label htmlFor="first name">Company Name<span style="color: red;">*</span></label>
             <input
@@ -42,8 +72,35 @@
               aria-describedby="firtname-help"
               class="set_input"
             />
-            <div *ngIf="submitted && form.controls['lastName'].invalid" class="invalid-feedback">
+            <div *ngIf="submitted && form.controls['companyName'].invalid" class="invalid-feedback">
                 <div >Company Name is required</div>
+            </div>
+          </div>
+          <div class="textfield" *ngIf="loggedInUser.userType == 'employer'">
+            <label htmlFor="first name">Company Address<span style="color: red;">*</span></label>
+            <input
+              type="text"
+              pInputText
+              id="companyAddress"
+              formControlName="companyAddress"
+              aria-describedby="firtname-help"
+              class="set_input"
+            />
+            <div *ngIf="submitted && form.controls['companyAddress'].invalid" class="invalid-feedback">
+                <div >Company Address is required</div>
+            </div>
+          </div>  <div class="textfield" *ngIf="loggedInUser.userType == 'employer'">
+            <label htmlFor="first name">Company Phone Number <span style="color: red;">*</span></label>
+            <input
+              type="text"
+              pInputText
+              id="companyPhone"
+              formControlName="companyPhone"
+              aria-describedby="firtname-help"
+              class="set_input"
+            />
+            <div *ngIf="submitted && form.controls['companyPhone'].invalid" class="invalid-feedback">
+                <div >Company Phone Number is required</div>
             </div>
           </div>
           <div class="textfield">

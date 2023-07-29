@@ -22,6 +22,8 @@ import { HeaderComponent } from './header/header.component';
 import { TooltipModule } from 'primeng/tooltip';
 import { AddAPostComponent } from './add-apost/add-apost.component';
 import { ApplicationsComponent } from './applications/applications.component';
+import { EditPostComponent } from './edit-post/edit-post.component';
+import { MessageService } from 'primeng/api';
 @NgModule({
   declarations: [
     LoginComponent,
@@ -33,6 +35,7 @@ import { ApplicationsComponent } from './applications/applications.component';
     HeaderComponent,
     AddAPostComponent,
     ApplicationsComponent,
+    EditPostComponent,
 
   ],
   imports: [
@@ -51,6 +54,6 @@ import { ApplicationsComponent } from './applications/applications.component';
 
 
   ],
-  providers:[AccountService,]
+  providers:[AccountService,MessageService]
 })
 export class AuthenticationModule { }
