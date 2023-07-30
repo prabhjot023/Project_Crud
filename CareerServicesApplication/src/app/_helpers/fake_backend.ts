@@ -61,9 +61,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       localStorage.setItem(usersKey, JSON.stringify(users));
       return ok();
     }
-
-  
-    
     function updateUser() {
       if (!isLoggedIn()) return unauthorized();
 
@@ -106,8 +103,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 
     function basicDetails(user: any) {
-      const { id, username, firstName, lastName, password, userType ,companyName,companyAddress,companyPhone} = user;
-      return { id, username, firstName, lastName, password, userType , companyName,companyAddress,companyPhone};
+
+      const { id, username, firstName, lastName, password, userType, companyName, companyAddress, companyPhone, desiredTitle, introduction} = user;
+      return { id, username, firstName, lastName, password, userType, companyName, companyAddress, companyPhone,  desiredTitle, introduction };
+
     }
 
     function isLoggedIn() {

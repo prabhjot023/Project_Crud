@@ -30,6 +30,7 @@ export class ResumePageComponent implements OnInit {
   pdfSrc: any;
   elementRef: ElementRef;
   submitted: boolean;
+  fileName: any;
   constructor(private formBuilder: FormBuilder, private accountService: AccountService,
     private messageService: MessageService,
     private router: Router, private route: ActivatedRoute,
@@ -53,6 +54,19 @@ export class ResumePageComponent implements OnInit {
       id: this.loggedInUser.id
 
     });
+    if (localStorage.getItem('uploadedResumes')) {
+      const downloadLink = document.createElement("a");
+      let data: any;
+      data = (localStorage.getItem('uploadedResumes'));
+      data = JSON.parse(data);
+      data.forEach((element: any) => {
+
+        if (element.id == this.loggedInUser.id) {
+
+          this.fileName = element.name;
+        }
+      })
+    }
   }
 
   buildExperienceBlock(): FormGroup[] {
@@ -74,7 +88,7 @@ export class ResumePageComponent implements OnInit {
     {
       return [this.addExperienceBlock()];
     }
-    
+
   }
   addExperienceBlock(): FormGroup {
     return this.formBuilder.group({
@@ -87,7 +101,7 @@ export class ResumePageComponent implements OnInit {
     });
   }
   buildEducationForm():FormGroup[]{
-    
+
     let eduArr =this.loggedInUserResume?.education;
     if(this.loggedInUserResume)
     {
@@ -134,7 +148,7 @@ export class ResumePageComponent implements OnInit {
          // this.messageService.clear();
 
           this.messageService.add({ severity: 'success', summary: 'Success' });
-         // this.setResumeType(false);
+            this.selected = false;
           //this.router.navigate(['/'], { relativeTo: this.route });
         },
         error: error => {
@@ -189,6 +203,7 @@ export class ResumePageComponent implements OnInit {
 
 
     const file = event.target.files[0];
+    this.fileName = file.name;
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
@@ -232,7 +247,9 @@ export class ResumePageComponent implements OnInit {
       data = JSON.parse(data);
       data.forEach((element: any) => {
 
+
         if (element.id == this.loggedInUser.id) {
+
           downloadLink.href = element.resumeLink;
           downloadLink.download = element.name;
           downloadLink.click();

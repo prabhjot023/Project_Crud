@@ -13,6 +13,9 @@ import { AddAPostComponent } from './add-apost/add-apost.component';
 import { ApplicationsComponent } from './applications/applications.component';
 import { PostPageComponent } from './post-page/post-page.component';
 
+import { EditPostComponent } from './edit-post/edit-post.component';
+
+
 
 
 export const routes: Routes = [
@@ -61,10 +64,17 @@ export const routes: Routes = [
     children:[],
   },
   {
+
     path:'postpage',
     component: PostPageComponent,
     children:[],
   }
+    path:'editPost/:id',
+    component: EditPostComponent,
+    children:[]
+
+  },
+
 ];
 
 @NgModule({

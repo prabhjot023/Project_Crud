@@ -48,7 +48,8 @@ export class AddAPostComponent {
       loc: ['', [Validators.required]],
       phone:['', [Validators.required]],
 
-      id: this.loggedInUser.id
+      id: this.loggedInUser.id,
+      postId:['']
 
     });
   }
