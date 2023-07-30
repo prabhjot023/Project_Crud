@@ -81,6 +81,7 @@
             <input
               type="text"
               pInputText
+
               id="companyAddress"
               formControlName="companyAddress"
               aria-describedby="firtname-help"
@@ -89,6 +90,7 @@
             <div *ngIf="submitted && form.controls['companyAddress'].invalid" class="invalid-feedback">
                 <div >Company Address is required</div>
             </div>
+
           </div>  <div class="textfield" *ngIf="loggedInUser.userType == 'employer'">
             <label htmlFor="first name">Company Phone Number <span style="color: red;">*</span></label>
             <input
@@ -103,6 +105,7 @@
                 <div >Company Phone Number is required</div>
             </div>
           </div>
+
           <div class="textfield">
             <label htmlFor="first name">Email<span style="color: red;">*</span></label>
             <input

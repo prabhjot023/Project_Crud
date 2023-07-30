@@ -22,8 +22,11 @@ import { HeaderComponent } from './header/header.component';
 import { TooltipModule } from 'primeng/tooltip';
 import { AddAPostComponent } from './add-apost/add-apost.component';
 import { ApplicationsComponent } from './applications/applications.component';
+import { PostPageComponent } from './post-page/post-page.component';
+
 import { EditPostComponent } from './edit-post/edit-post.component';
 import { MessageService } from 'primeng/api';
+
 @NgModule({
   declarations: [
     LoginComponent,
@@ -35,7 +38,11 @@ import { MessageService } from 'primeng/api';
     HeaderComponent,
     AddAPostComponent,
     ApplicationsComponent,
+
+    PostPageComponent,
+
     EditPostComponent,
+
 
   ],
   imports: [
