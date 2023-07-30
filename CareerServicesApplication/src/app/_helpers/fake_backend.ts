@@ -7,10 +7,9 @@ import { delay, materialize, dematerialize } from 'rxjs/operators';
 const usersKey = 'Users';
 let users: any[] = JSON.parse(localStorage.getItem(usersKey)!) || [];
 const resumeKey = 'Resumes';
-const postKey = 'Posts';
-
 
 let resumes: any[] = JSON.parse(localStorage.getItem(resumeKey)!) || [];
+const postKey = 'Posts';
 let posts: any[] = JSON.parse(localStorage.getItem(postKey)!) || [];
 
 @Injectable()
@@ -26,18 +25,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
           return authenticate();
         case url.endsWith('/users/register') && method === 'POST':
           return register();
-        case url.endsWith('/users/addResume') && method === 'POST':
-          return addResume();
-        case url.endsWith('/users/addPost') && method === 'POST':
-          return addPost();
-        case url.endsWith('/users') && method === 'GET':
-          return getUsers();
-        case url.match(/\/users\/\d+$/) && method === 'GET':
-          return getUserById();
         case url.match(/\/users\/\d+$/) && method === 'PUT':
           return updateUser();
-        case url.match(/\/users\/\d+$/) && method === 'DELETE':
-          return deleteUser();
+        case url.endsWith('/users/addResume') && method === 'POST':
+            return addResume();
+        case url.endsWith('/users/addPost') && method === 'POST':
+            return addPost();
         default:
           // pass through any requests not handled above
           return next.handle(request);
@@ -56,7 +49,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       })
     }
 
-    function register() {
+     function register() {
       const user = body
 
       if (users.find(x => x.username === user.username)) {
@@ -69,44 +62,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       return ok();
     }
 
-    function addPost() {
-
-
-        let params = body;
-
-          posts.push(params);
-          localStorage.setItem(postKey, JSON.stringify(posts));
-
-        return ok();
-
-    }
-    function addResume() {
-
-
-      let params = body;
-      if (resumes.find(x => x.id === body.id)) {
-        let resume = resumes.find(x => x.id === body.id);
-        Object.assign(resume, params);
-        localStorage.setItem(resumeKey, JSON.stringify(resumes));
-      }
-      else {
-        resumes.push(params);
-        localStorage.setItem(resumeKey, JSON.stringify(resumes));
-      }
-      return ok();
-    }
-    function getUsers() {
-      if (!isLoggedIn()) return unauthorized();
-      return ok(users.map(x => basicDetails(x)));
-    }
-
-    function getUserById() {
-      if (!isLoggedIn()) return unauthorized();
-
-      const user = users.find(x => x.id === idFromUrl());
-      return ok(basicDetails(user));
-    }
-
+  
+    
     function updateUser() {
       if (!isLoggedIn()) return unauthorized();
 
@@ -125,12 +82,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       return ok();
     }
 
-    function deleteUser() {
-      if (!isLoggedIn()) return unauthorized();
-
-      users = users.filter(x => x.id !== idFromUrl());
-      localStorage.setItem(usersKey, JSON.stringify(users));
-      return ok();
+   
+    function idFromUrl() {
+      const urlParts = url.split('/');
+      return parseInt(urlParts[urlParts.length - 1]);
     }
 
     // helper functions
@@ -151,8 +106,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     }
 
     function basicDetails(user: any) {
-      const { id, username, firstName, lastName, password, userType, companyName, companyAddress, companyPhone } = user;
-      return { id, username, firstName, lastName, password, userType, companyName, companyAddress, companyPhone };
+      const { id, username, firstName, lastName, password, userType ,companyName,companyAddress,companyPhone} = user;
+      return { id, username, firstName, lastName, password, userType , companyName,companyAddress,companyPhone};
     }
 
     function isLoggedIn() {
@@ -164,9 +119,33 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       }
     }
 
-    function idFromUrl() {
-      const urlParts = url.split('/');
-      return parseInt(urlParts[urlParts.length - 1]);
+    function addResume() {
+
+
+        let params = body;
+        if(resumes.find(x => x.id === body.id))
+        {
+        let resume = resumes.find(x => x.id === body.id);
+        Object.assign(resume, params);
+        localStorage.setItem(resumeKey, JSON.stringify(resumes));
+        }
+        else{
+          resumes.push(params);
+        localStorage.setItem(resumeKey, JSON.stringify(resumes));
+        }
+        return ok();
+      }
+   
+      function addPost() {
+
+
+        let params = body;
+
+          posts.push(params);
+          localStorage.setItem(postKey, JSON.stringify(posts));
+
+        return ok();
+
     }
   }
 }

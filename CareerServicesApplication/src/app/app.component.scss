@@ -2,29 +2,3 @@
   margin: 0px;
   padding: 0px;
 }
-
-#loader {
-  width: 100%;
-  height: 100%;
-  top: 0;
-  position: fixed;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 5000;
-}
-
-#loader .btn-loading {
-  width: 155px !important;
-  height: 155px !important;
-  border: 5px solid #f3f3f3;
-   border-top: 5px solid #555!important;
-  //border-top: 5px solid $color-blue;
-  margin: 0 !important;
-}
-
-#loader .bg-color {
-  background-color: #ddd;
-  padding: 10px;
-  border-radius: 8px;
-}
