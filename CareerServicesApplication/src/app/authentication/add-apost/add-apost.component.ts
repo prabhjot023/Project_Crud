@@ -49,7 +49,7 @@ export class AddAPostComponent {
       phone:['', [Validators.required]],
 
       id: this.loggedInUser.id,
-      postId:['']
+      postId:[''],
 
     });
   }
@@ -69,7 +69,11 @@ save() {
     return;
   }
 
-  this.accountService.addPost(this.addPostForm.value)
+  let obj = {
+    'userId': [],
+    ...this.addPostForm.value
+  }
+  this.accountService.addPost(obj)
     .pipe(first())
     .subscribe({
       next: () => {
