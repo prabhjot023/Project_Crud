@@ -1,4 +1,6 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-applications',
@@ -10,6 +12,10 @@ export class ApplicationsComponent implements OnInit {
   loggedInUser: any;
   userNotifications: any=[];
 
+  constructor(private router : Router ,private location : Location)
+  {
+
+  }
 
   ngOnInit(): void {
 
@@ -28,5 +34,6 @@ export class ApplicationsComponent implements OnInit {
   }
   toggle() {
     this.selected = false;
+    this.location.back();
   }
 }

@@ -27,11 +27,20 @@
       <div class="more-width">{{i.firstName}}&nbsp;{{i.lastName}}</div>
       <a href="javascript:void(0)" (click)="viewResume(i)">View Resume</a>
       <div>
-        <a href="javascript:void(0)" class="pi pi-check" style="color: green" (click)="sendNotification(i,true)"></a>&nbsp;&nbsp;
-        <a href="javascript:void(0)"  class="pi pi-times" style="color: red" (click)="sendNotification(i,false)"></a>
+        <a href="javascript:void(0)" *ngIf="i.isAccepted == null" class="pi pi-check" style="color: green" (click)="sendNotification(i,true)"></a>&nbsp;&nbsp;
+        <a href="javascript:void(0)" *ngIf="i.isAccepted == null" class="pi pi-times" style="color: red" (click)="sendNotification(i,false)"></a>
+      <span *ngIf="i.isAccepted == true">
+Accepted
+      </span>
+
+      <span *ngIf="i.isAccepted == false">
+Rejected
+      </span>
       </div>
     </div>
   </div>
+
+
     <div *ngIf="usersData.length == 0">
       <p>No Applications yet.</p>
     </div>

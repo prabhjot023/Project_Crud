@@ -13,6 +13,9 @@
           <span *ngIf="!notification.isAccepted">rejected</span>  your Job
             Application for {{notification.job_title}}</span><span class="font-time"> 25 minutes ago</span>
         </p>
+        <p *ngIf="userNotifications.length == 0">
+          No notifications found.
+        </p>
         <hr>
 
       </p-card>

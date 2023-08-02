@@ -353,11 +353,7 @@
             </button>
           </div>
         </form>
-        <div style="    padding: 20px;
-        padding-left: 0px;">
-          <p-checkbox [(ngModel)]="selectedResumeType" value="form" (onChange)="toggleResumeType($event)"  inputId="ny"></p-checkbox>
-        <label for="ny" style="margin-left: 6px;">Set as default</label>
-        </div>
+
 
       </div>
     </div>
@@ -380,11 +376,7 @@
     <ng-template pTemplate="footer">
       <input pInputText (change)="onFileSelected($event)" class="resumeText" type="file" id="file">
       <button pButton (click)="displayPdf()" style="margin-top: 10px;" *ngIf="fileName != null">{{fileName}}</button>
-      <div style="    padding: 20px;
-      padding-left: 0px;">
-        <p-checkbox [(ngModel)]="selectedResumeType1" (onChange)="toggleResumeType($event)"  value="upload" inputId="ny1"></p-checkbox>
-      <label for="ny1" style="margin-left: 6px;">Set as default</label>
-      </div>
+
 
     </ng-template>
 

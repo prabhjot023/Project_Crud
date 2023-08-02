@@ -62,7 +62,7 @@ export class HomePageComponent implements OnInit {
 
       if(elem.userId.length>0)
       {
-        if(elem.userId.find((x:any) => x === this.loggedInUser.id))
+        if(elem.userId.find((x:any) => x.userId === this.loggedInUser.id))
         {
 
           let obj ={
@@ -133,7 +133,11 @@ export class HomePageComponent implements OnInit {
 
     if(!data.isApplied)
     {
-    data.userId.push(this.loggedInUser.id)
+    data.userId.push({
+      'isAccepted':null,
+      'userId':this.loggedInUser.id
+
+    })
     this.accountService.updatePost(data.postId,data);
 
     this.messageService.add({ severity: 'success', summary: 'Your application has been sent to the employer' });

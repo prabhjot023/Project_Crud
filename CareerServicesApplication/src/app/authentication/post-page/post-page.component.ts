@@ -14,13 +14,30 @@ export class PostPageComponent {
 
   constructor(private router: Router,private accountService : AccountService) {
 
-    this.postData = JSON.parse(localStorage.getItem('currentPost')!);
+
+
+this.setData();
+
+  }
+
+  setData()
+  {
+
+    let posts = JSON.parse(localStorage.getItem('Posts')!);
+
+    let postData1 = JSON.parse(localStorage.getItem('currentPost')!);
+
+    this.usersData =[];
+    this.postData =posts.find((x:any)=>x.postId == postData1.postId);
 
     let users = JSON.parse(localStorage.getItem("Users")!);
-    if (this.postData.userId.length > 0) {
+    if (this.postData.userId.length > 0 ) {
       this.postData.userId.forEach((elem: any) => {
 
-        this.usersData.push(users.find((x: any) => x.id == elem));
+        let oj =users.find((x: any) => x.id == elem.userId);
+        oj.isAccepted = elem.isAccepted;
+       this.usersData.push(oj);
+
 
       })
     }
@@ -98,6 +115,36 @@ export class PostPageComponent {
   sendNotification(data: any, flag: boolean) {
 
     //this.sendSms();
+
+
+
+      let post = JSON.parse(localStorage.getItem('Posts')!);
+      post.forEach((elem:any)=>{
+        let count1=0;
+        if(elem.userId && elem.userId.length>0)
+        {
+
+          let obj: {  userId: any; isAccepted: boolean; }[] = [];
+          let count =0;
+          elem.userId.forEach((element:any) => {
+
+            if(element.userId == data.id){
+            post[count1].userId[count].isAccepted = flag
+            }
+
+            count++;
+
+          });
+
+          count1++;
+
+
+
+          localStorage.setItem('Posts',JSON.stringify(post));
+          this.setData();
+      }
+      })
+
 
     if (localStorage.getItem("notification")) {
 
