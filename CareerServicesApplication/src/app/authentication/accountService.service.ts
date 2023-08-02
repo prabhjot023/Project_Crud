@@ -49,7 +49,7 @@ export class AccountService {
     });
 
     const body = new URLSearchParams();
-    body.set('recipientNumber', phoneNumber);
+    body.set('recipientNumber', '1'+phoneNumber);
     body.set('messageBody',body1);
     // Set the recipient phone number in the request payload
     this.http.post<any>('https://bazaar-frenchfry-6660.twil.io/testfunc', body, { headers }).subscribe(

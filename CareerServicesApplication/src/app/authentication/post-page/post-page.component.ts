@@ -12,99 +12,80 @@ export class PostPageComponent {
 
   usersData: any = [];
 
-  constructor(private router: Router,private accountService : AccountService) {
+  constructor(private router: Router, private accountService: AccountService) {
 
 
 
-this.setData();
+    this.setData();
 
   }
 
-  setData()
-  {
+  setData() {
 
     let posts = JSON.parse(localStorage.getItem('Posts')!);
 
     let postData1 = JSON.parse(localStorage.getItem('currentPost')!);
 
-    this.usersData =[];
-    this.postData =posts.find((x:any)=>x.postId == postData1.postId);
+    this.usersData = [];
+    this.postData = posts.find((x: any) => x.postId == postData1.postId);
 
     let users = JSON.parse(localStorage.getItem("Users")!);
-    if (this.postData.userId.length > 0 ) {
+    if (this.postData.userId.length > 0) {
       this.postData.userId.forEach((elem: any) => {
 
-        let oj =users.find((x: any) => x.id == elem.userId);
+        let oj = users.find((x: any) => x.id == elem.userId);
         oj.isAccepted = elem.isAccepted;
-       this.usersData.push(oj);
+        if (elem.type == 0) {
+          oj.resumeType = 'form';
+
+        }
+        if (elem.type == 1) {
+          oj.resumeType = 'upload';
+
+        }
+        this.usersData.push(oj);
 
 
       })
+      console.log(this.usersData);
     }
   }
 
   viewResume(data: any) {
 
-    let users = JSON.parse(localStorage.getItem("Users")!);
-    if (users.find((x: any) => x.id === data.id)) {
+    if (data.resumeType == 'upload'
+    ) {
+      let users = JSON.parse(localStorage.getItem("Users")!);
+      if (users.find((x: any) => x.id === data.id)) {
 
-      let user = users.find((x: any) => x.id === data.id);
-
-
-      if (localStorage.getItem("uploadedResumes")) {
-
-
-        const downloadLink = document.createElement("a");
-        let resumes: any;
-        resumes = (localStorage.getItem('uploadedResumes'));
-        resumes = JSON.parse(resumes);
-        resumes.forEach((element: any) => {
+        let user = users.find((x: any) => x.id === data.id);
 
 
-          if (element.id == data.id) {
+        if (localStorage.getItem("uploadedResumes")) {
 
-            downloadLink.href = element.resumeLink;
-            downloadLink.download = element.name;
-            downloadLink.click();
-          }
-        });
+
+          const downloadLink = document.createElement("a");
+          let resumes: any;
+          resumes = (localStorage.getItem('uploadedResumes'));
+          resumes = JSON.parse(resumes);
+          resumes.forEach((element: any) => {
+
+
+            if (element.id == data.id) {
+
+              downloadLink.href = element.resumeLink;
+              downloadLink.download = element.name;
+              downloadLink.click();
+            }
+          });
+        }
       }
-      // if(user.default && user.default == "upload")
-      // {
 
-      //   if(localStorage.getItem("uploadedResumes"))
-      //   {
+    }
+    else{
 
+      this.router.navigate(['/viewResume',data.id]);
 
-      //     const downloadLink = document.createElement("a");
-      //     let resumes: any;
-      //     resumes = (localStorage.getItem('uploadedResumes'));
-      //     resumes = JSON.parse(resumes);
-      //     resumes.forEach((element: any) => {
-
-
-      //       if (element.id == data.id) {
-
-      //         downloadLink.href = element.resumeLink;
-      //         downloadLink.download = element.name;
-      //         downloadLink.click();
-      //       }
-      //     });
-
-
-
-
-
-
-      //   }
-      // }
-
-      // if(user.default && user.default == "form")
-      // {
-
-      //   this.router.navigate(['/viewResume'],user.id);
-
-      // }
 
 
     }
@@ -118,46 +99,50 @@ this.setData();
 
 
 
-      let post = JSON.parse(localStorage.getItem('Posts')!);
-      post.forEach((elem:any)=>{
-        let count1=0;
-        if(elem.userId && elem.userId.length>0)
-        {
 
-          let obj: {  userId: any; isAccepted: boolean; }[] = [];
-          let count =0;
-          elem.userId.forEach((element:any) => {
+    this.sendSms(data.phoneNumber, flag)
 
-            if(element.userId == data.id){
+
+
+    let post = JSON.parse(localStorage.getItem('Posts')!);
+    post.forEach((elem: any) => {
+      let count1 = 0;
+      if (elem.userId && elem.userId.length > 0) {
+
+        let obj: { userId: any; isAccepted: boolean; }[] = [];
+        let count = 0;
+        elem.userId.forEach((element: any) => {
+
+          if (element.userId == data.id) {
             post[count1].userId[count].isAccepted = flag
-            }
+          }
 
-            count++;
+          count++;
 
-          });
+        });
 
-          count1++;
+        count1++;
 
 
 
-          localStorage.setItem('Posts',JSON.stringify(post));
-          this.setData();
+        localStorage.setItem('Posts', JSON.stringify(post));
+        this.setData();
       }
-      })
+    })
 
 
     if (localStorage.getItem("notification")) {
 
       let previousData = [];
       let newData = JSON.parse(localStorage.getItem("notification")!);
-      newData.forEach((elem:any)=>{
+      newData.forEach((elem: any) => {
         previousData.push(elem);
       })
 
       let obj = {
-        'companyName':this.postData.companyName,
-        'id':data.id,
-        'job_title':this.postData.job_title,
+        'companyName': this.postData.companyName,
+        'id': data.id,
+        'job_title': this.postData.job_title,
         'isAccepted': flag,
 
       }
@@ -174,9 +159,9 @@ this.setData();
     else {
       let previous = [];
       let obj = {
-       'companyName':this.postData.companyName,
-       'id':data.id,
-       'job_title':this.postData.job_title,
+        'companyName': this.postData.companyName,
+        'id': data.id,
+        'job_title': this.postData.job_title,
 
         'isAccepted': flag
       }
@@ -192,7 +177,7 @@ this.setData();
     //   }
 
 
-   // this.getStatus();
+    // this.getStatus();
   }
   // getStatus()
   // {
@@ -213,11 +198,20 @@ this.setData();
   // }
 
 
-  sendSms()
-  {
+  sendSms(phone: any, flag: boolean) {
 
 
-    this.accountService.sendMessage('15145719498','Application accepted');
+    if (flag) {
+
+      let string = 'Your application has been accepted by ' + this.postData.companyName + ' for ' + this.postData.job_title;
+      this.accountService.sendMessage(phone.toString(), string);
+    }
+    else {
+      let string = this.postData.companyName + ' is not moving forward with your job application for ' + this.postData.job_title;
+
+      this.accountService.sendMessage(phone.toString(), string);
+
+    }
 
 
   }
