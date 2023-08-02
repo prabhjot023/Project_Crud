@@ -31,6 +31,7 @@ export class SignUpComponent {
     this.form = this.formBuilder.group({
       firstName: [''],
       lastName: [''],
+      phoneNumber:[''],
       companyName:[''],
       companyAddress:[''],
       companyPhone:[''],
@@ -43,6 +44,7 @@ export class SignUpComponent {
     {
       this.form.controls['firstName'].setValidators(Validators.required);
       this.form.controls['lastName'].setValidators(Validators.required);
+      this.form.controls['phoneNumber'].setValidators([Validators.required,Validators.minLength(10)]);
 
     }
     else{

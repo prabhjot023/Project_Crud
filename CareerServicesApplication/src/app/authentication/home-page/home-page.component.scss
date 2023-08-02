@@ -3,7 +3,9 @@
     background-color: #f3f2f1;
     position: relative;
 }
-
+.modal{
+  background-color: rgb(0,0,0,0.5);
+}
 .cards{
     display: flex;
     flex-wrap: wrap;

@@ -12,4 +12,5 @@ export class User {
   desiredTitle?: any;
   introduction?: any;
   default?:any;
+  phoneNumber?:any;
 }

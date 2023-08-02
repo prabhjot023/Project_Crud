@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -11,10 +12,11 @@ export class ViewResumeComponent implements OnInit{
   resumeBuilderForm: any;
   loggedInUserResume: any;
   loggedInUser: any;
-  expArrForm: any;
-  eduArrForm: any;
 
-  constructor(private formBuilder : FormBuilder,private route : ActivatedRoute)
+  expArrForm: FormGroup[] = [];
+  eduArrForm: FormGroup[] = [];
+  constructor(private formBuilder : FormBuilder,private route : ActivatedRoute,
+    private location : Location)
   {
 
   }
@@ -26,7 +28,7 @@ export class ViewResumeComponent implements OnInit{
         console.log(params) //log the entire params object
         this.loggedInUser = params['id'] //log the value of id
       });
-    this.loggedInUserResume = resume.find((x: any) => x.id === this.loggedInUser.id);
+    this.loggedInUserResume = resume.find((x: any) => x.id == this.loggedInUser);
 
     this.resumeBuilderForm = this.formBuilder.group({
       firstName: [this.loggedInUserResume?.firstName || this.loggedInUser?.firstName, Validators.required],
@@ -44,7 +46,7 @@ export class ViewResumeComponent implements OnInit{
 
   buildExperienceBlock(): FormGroup[] {
     let expArr = this.loggedInUserResume?.experienceBlocks;
-
+    if (this.loggedInUserResume) {
       expArr.forEach((exp: { title: any; company: any; location: any; startDate: any; endDate: any; description: any; }) => {
         this.expArrForm.push(this.formBuilder.group({
           title: [exp?.title, [Validators.required]],
@@ -56,14 +58,26 @@ export class ViewResumeComponent implements OnInit{
         }))
       });
       return this.expArrForm;
-
-
+    }
+    else {
+      return [this.addExperienceBlock()];
+    }
 
   }
-
+  addExperienceBlock(): FormGroup {
+    return this.formBuilder.group({
+      title: ['', [Validators.required]],
+      company: ['', [Validators.required]],
+      location: ['', [Validators.required]],
+      startDate: ['', [Validators.required]],
+      endDate: ['', [Validators.required]],
+      description: ['', [Validators.required]]
+    });
+  }
   buildEducationForm(): FormGroup[] {
 
     let eduArr = this.loggedInUserResume?.education;
+    if (this.loggedInUserResume) {
       eduArr.forEach((edu: { level_of_education: any; school_name: any; field: any; startDate: any; endDate: any; }) => {
         this.eduArrForm.push(this.formBuilder.group({
           level_of_education: [edu.level_of_education, [Validators.required]],
@@ -74,8 +88,21 @@ export class ViewResumeComponent implements OnInit{
         }))
       });
       return this.eduArrForm;
+    }
+    else {
+      return [this.educations()];
+    }
+  }
 
+  educations(): FormGroup {
+    return this.formBuilder.group({
+      level_of_education: ['', [Validators.required]],
+      school_name: ['', [Validators.required]],
+      field: ['', [Validators.required]],
+      startDate: ['', [Validators.required]],
+      endDate: ['', [Validators.required]],
 
+    });
   }
   get experienceBlocks(): FormArray {
     return this.resumeBuilderForm.get('experienceBlocks') as FormArray;
@@ -85,4 +112,8 @@ export class ViewResumeComponent implements OnInit{
     return this.resumeBuilderForm.get('education') as FormArray;
   }
 
+  goBack()
+  {
+    this.location.back();
+  }
 }

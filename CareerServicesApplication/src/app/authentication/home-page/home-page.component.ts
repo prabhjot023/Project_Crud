@@ -19,6 +19,8 @@ export class HomePageComponent implements OnInit {
   allStudents:any;
   selectedposts:any;
   allUsers: any;
+  displayStyle="none";
+  selctedJob: any;
   constructor(private messageService : MessageService,private router : Router,
     private accountService : AccountService)
   {
@@ -128,19 +130,79 @@ export class HomePageComponent implements OnInit {
     this.router.navigate(['/editPost',id]);
   }
 
-  applyJob(data:any)
+  applyJob(data:any,type:any)
   {
 
     if(!data.isApplied)
     {
-    data.userId.push({
-      'isAccepted':null,
-      'userId':this.loggedInUser.id
 
-    })
-    this.accountService.updatePost(data.postId,data);
+      let users = JSON.parse(localStorage.getItem("Users")!);
+      if (users.find((x: any) => x.id === this.loggedInUser.id)) {
 
-    this.messageService.add({ severity: 'success', summary: 'Your application has been sent to the employer' });
+
+        if(type == 1)
+        {
+
+        if (localStorage.getItem("uploadedResumes")) {
+          let resumes: any;
+          resumes = (localStorage.getItem('uploadedResumes'));
+          resumes = JSON.parse(resumes);
+          resumes.forEach((element: any) => {
+
+
+            if (element.id == this.loggedInUser.id) {
+
+              data.userId.push({
+                'isAccepted':null,
+                'userId':this.loggedInUser.id,
+                'type':type
+
+              })
+              this.accountService.updatePost(data.postId,data);
+              this.closePopup();
+
+              this.messageService.add({ severity: 'success', summary: 'Your application has been sent to the employer' });
+            }
+            else{
+              this.messageService.add({ severity: 'warn', summary: 'Please upload your resume first' });
+
+            }
+        })
+      }
+    }
+
+    if(type == 0)
+    {
+      if (localStorage.getItem("Resumes")) {
+        let resumes: any;
+        resumes = (localStorage.getItem('Resumes'));
+        resumes = JSON.parse(resumes);
+        resumes.forEach((element: any) => {
+
+
+          if (element.id == this.loggedInUser.id) {
+
+            data.userId.push({
+              'isAccepted':null,
+              'userId':this.loggedInUser.id,
+              'type':type
+
+            })
+            this.accountService.updatePost(data.postId,data);
+
+            this.closePopup();
+            this.messageService.add({ severity: 'success', summary: 'Your application has been sent to the employer' });
+          }
+          else{
+            this.messageService.add({ severity: 'warn', summary: 'Please build your resume first' });
+
+          }
+      })
+    }
+    }
+    }
+
+
   }
   else{
 
@@ -156,5 +218,14 @@ export class HomePageComponent implements OnInit {
     localStorage.setItem('currentPost',JSON.stringify(data));
 
     this.router.navigate(['/postpage'])
+  }
+
+
+  openPopup(data:any) {
+    this.displayStyle = "block";
+    this.selctedJob = data;
+  }
+  closePopup() {
+    this.displayStyle = "none";
   }
 }

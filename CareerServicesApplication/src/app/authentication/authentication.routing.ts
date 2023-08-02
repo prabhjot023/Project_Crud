@@ -14,6 +14,7 @@ import { ApplicationsComponent } from './applications/applications.component';
 import { PostPageComponent } from './post-page/post-page.component';
 
 import { EditPostComponent } from './edit-post/edit-post.component';
+import { ViewResumeComponent } from './view-resume/view-resume.component';
 
 
 
@@ -77,7 +78,7 @@ export const routes: Routes = [
   },
   {
     path:'viewResume/:id',
-    component: EditPostComponent,
+    component: ViewResumeComponent,
     children:[]
 
   }

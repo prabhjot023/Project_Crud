@@ -41,6 +41,26 @@
               <div>Last Name is required</div>
             </div>
           </div>
+
+          <div class="textfield" *ngIf="userId == 'student'">
+            <label htmlFor="first name"
+              >Phone Number<span style="color: red">*</span></label
+            >
+            <input
+              type="phone"
+              pInputText
+              id="phoneNumber"
+              formControlName="phoneNumber"
+              aria-describedby="firtname-help"
+              class="set_input"
+            />
+            <div
+              *ngIf="submitted && form.controls['phoneNumber'].invalid"
+              class="invalid-feedback"
+            >
+              <div>Phone Number is required</div>
+            </div>
+          </div>
           <div class="textfield" *ngIf="userId== 'employer'">
             <label htmlFor="first name">Company Name<span style="color: red;">*</span></label>
             <input
