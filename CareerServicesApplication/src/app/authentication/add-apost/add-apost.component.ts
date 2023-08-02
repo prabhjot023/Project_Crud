@@ -42,14 +42,14 @@ export class AddAPostComponent {
 
   ngOnInit(): void {
     this.addPostForm = this.formBuilder.group({
-      companyName: [ '', Validators.required],
+      companyName: [ this.loggedInUser.companyName || '', Validators.required],
       job_title: [ '', Validators.required],
       job_desc: ['', [Validators.required]],
-      loc: ['', [Validators.required]],
-      phone:['', [Validators.required]],
+      loc: [this.loggedInUser.companyAddress || '', [Validators.required]],
+      phone:[this.loggedInUser.companyPhone || '', [Validators.required]],
 
       id: this.loggedInUser.id,
-      postId:['']
+      postId:[''],
 
     });
   }
@@ -69,7 +69,11 @@ save() {
     return;
   }
 
-  this.accountService.addPost(this.addPostForm.value)
+  let obj = {
+    'userId': [],
+    ...this.addPostForm.value
+  }
+  this.accountService.addPost(obj)
     .pipe(first())
     .subscribe({
       next: () => {

@@ -72,7 +72,10 @@ export class SignUpComponent {
         next: () => {
           this.messageService.clear();
           this.messageService.add({ severity: 'success', summary: 'Success' });
-          this.router.navigate(['/'], { relativeTo: this.route });
+          setTimeout(()=>{
+
+            this.router.navigate(['/'], { relativeTo: this.route });
+          },1000)
         },
         error: error => {
           this.messageService.add({  severity: 'warn', summary: 'This email is already registered, Please Login',});
@@ -81,3 +84,4 @@ export class SignUpComponent {
       });
   }
 }
+

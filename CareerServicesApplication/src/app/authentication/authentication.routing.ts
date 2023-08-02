@@ -68,12 +68,19 @@ export const routes: Routes = [
     path:'postpage',
     component: PostPageComponent,
     children:[],
-  }
+  },
+  {
     path:'editPost/:id',
     component: EditPostComponent,
     children:[]
 
   },
+  {
+    path:'viewResume/:id',
+    component: EditPostComponent,
+    children:[]
+
+  }
 
 ];
 

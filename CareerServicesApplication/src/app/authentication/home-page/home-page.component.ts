@@ -30,7 +30,7 @@ export class HomePageComponent implements OnInit {
     this.allUsers = JSON.parse(localStorage.getItem('Users')!) || [];
 
     this.selectedposts=[];
-    if(this.loggedInUser.userType == 'employer')
+    if(this.loggedInUser.userType == 'employer' ||  this.loggedInUser.userType == 'admin')
     {
     this.allposts.forEach((elem:any)=>{
 
@@ -50,6 +50,31 @@ export class HomePageComponent implements OnInit {
       {
         this.allStudents.push(elem);
       }
+    })
+  }
+
+  else{
+
+    let index =0;
+    this.allposts.forEach((elem:any)=>{
+
+
+
+      if(elem.userId.length>0)
+      {
+        if(elem.userId.find((x:any) => x.userId === this.loggedInUser.id))
+        {
+
+          let obj ={
+            'isApplied' :true,
+            ...elem
+          }
+          this.allposts[index] = obj;
+
+        }
+
+      }
+      index++;
     })
   }
 
@@ -78,6 +103,26 @@ export class HomePageComponent implements OnInit {
 
     })
   }
+
+
+  deleteStudent(id:any)
+  {
+    this.allUsers.forEach((elem:any)=>{
+
+      if(elem.id == id)
+      {
+        let students = this.allUsers.filter((x:any) => x.id !== id);
+        localStorage.removeItem('Users');
+            localStorage.setItem('Users', JSON.stringify(students));
+            this.messageService.add({ severity: 'success', summary: 'Student deleted successfully' });
+
+            this.ngOnInit();
+      }
+
+    })
+  }
+
+
   editJob(id:any)
   {
     this.router.navigate(['/editPost',id]);
@@ -86,19 +131,30 @@ export class HomePageComponent implements OnInit {
   applyJob(data:any)
   {
 
-    if(!data.userId)
+    if(!data.isApplied)
     {
-    let obj ={
-      'userId':this.loggedInUser.id,
-      ...data
-    }
-    this.accountService.updatePost(data.postId,obj);
-    this.ngOnInit();
+    data.userId.push({
+      'isAccepted':null,
+      'userId':this.loggedInUser.id
+
+    })
+    this.accountService.updatePost(data.postId,data);
+
     this.messageService.add({ severity: 'success', summary: 'Your application has been sent to the employer' });
   }
   else{
+
     this.messageService.add({ severity: 'success', summary: 'Your application has already been sent to the employer' });
 
   }
+  this.ngOnInit();
+  }
+
+  redirectToPost(data:any)
+  {
+
+    localStorage.setItem('currentPost',JSON.stringify(data));
+
+    this.router.navigate(['/postpage'])
   }
 }

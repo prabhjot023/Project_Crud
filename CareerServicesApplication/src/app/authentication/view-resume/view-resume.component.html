@@ -1,54 +1,14 @@
-<app-header></app-header>
-<p-toast></p-toast>
-<div class="container-fluid set_alignment" *ngIf="!selected">
-  <p-card [style]="{ width: '360px' }">
-    <ng-template pTemplate="header">
-      <img alt="Card" src="../../../assets/images/resume.svg" />
-    </ng-template>
-    <h4>Please choose one of the following</h4>
-    <p style="margin-top: 5px">
-      Create or upload resume to help you apply for jobs.
-    </p>
-    <p-toast></p-toast>
-    <ng-template pTemplate="footer">
-      <p-button
-      *ngIf="loggedInUserResume"
-        label="View/Edit Your Resume"
-        class="set_button_align"
-        (click)="setResumeType(true)"
-
-      ></p-button>
-      <p-button
-      *ngIf="!loggedInUserResume"
-        label="Build Your Resume"
-        class="set_button_align"
-        (click)="setResumeType(true)"
-
-      ></p-button>
-      <p-button
-        label="Upload Resume"
-        class="set_button_align"
-        (click)="setResumeType(false)"
-        styleClass="p-button-outlined"
-        [style]="{ 'margin-left': '.5em' }"
-      ></p-button>
-    </ng-template>
-  </p-card>
-</div>
-
-<!-- <div class="card" *ngIf="selected && resumeTypeBuild"> -->
-<div class="container-fluid form-align" *ngIf="selected && resumeTypeBuild">
+<div class="container-fluid form-align" >
   <p-card header="Build Your Resume" [style]="{ width: '650px' }">
     <i
       class="pi pi-arrow-left abs-icon"
       style="font-size: 1.5rem"
-      (click)="toggle()"
     ></i>
     <div>
       <div class="col-md-12">
         <form
           novalidate
-          (ngSubmit)="save()"
+
           [formGroup]="resumeBuilderForm"
           autocomplete="false"
         >
@@ -66,14 +26,7 @@
               class="set_input"
 
             />
-            <div
-              *ngIf="
-                submitted && resumeBuilderForm.controls['firstName'].invalid
-              "
-              class="invalid-feedback"
-            >
-              <div>First Name is required</div>
-            </div>
+
           </div>
           <div class="textfield">
             <label htmlFor="first name" for="lastNameId"
@@ -88,14 +41,7 @@
               placeholder="Last Name"
               class="set_input"
             />
-            <div
-              *ngIf="
-                submitted && resumeBuilderForm.controls['lastName'].invalid
-              "
-              class="invalid-feedback"
-            >
-              <div>Last Name is required</div>
-            </div>
+
           </div>
           <div class="textfield">
             <label htmlFor="email Id" for="emailId"
@@ -110,12 +56,7 @@
               placeholder="Email"
               class="set_input"
             />
-            <div
-              *ngIf="submitted && resumeBuilderForm.controls['email'].invalid"
-              class="invalid-feedback"
-            >
-              <div>Email is required</div>
-            </div>
+
           </div>
           <div class="textfield">
             <label htmlFor="phone Id" for="phoneId"
@@ -130,24 +71,12 @@
               placeholder="Phone Number"
               class="set_input"
             />
-            <div
-              *ngIf="submitted && resumeBuilderForm.controls['phone'].invalid"
-              class="invalid-feedback"
-            >
-              <div>Phone Number is required</div>
-            </div>
+
           </div>
           <div class="flexContainer">
             <div class="exp-align">
               <label for="experienceId" class="heading-label">Experience</label>
-              <div>
-                <i
-                  class="pi pi-plus-circle"
-                  style="font-size: 1.5rem"
-                  (click)="addExperience()"
-                  pTooltip="Add Experience"
-                ></i>
-              </div>
+
             </div>
             <div
               formArrayName="experienceBlocks"
@@ -239,12 +168,7 @@
                 </div>
                 <div class="trash-icon">
                   <hr *ngIf="i !== experienceBlocks.controls.length - 1" />
-                  <i
-                    class="pi pi-trash"
-                    style="font-size: 1.5rem"
-                    (click)="removeExperience(i)"
-                    pTooltip="Delete Above Experience"
-                  ></i>
+
                 </div>
               </div>
             </div>
@@ -253,14 +177,7 @@
           <div class="flexContainer">
             <div class="exp-align">
               <label for="experienceId" class="heading-label">Education</label>
-              <div>
-                <i
-                  class="pi pi-plus-circle"
-                  style="font-size: 1.5rem"
-                  (click)="addEducation()"
-                  pTooltip="Add Education"
-                ></i>
-              </div>
+
             </div>
             <div
               formArrayName="education"
@@ -338,12 +255,7 @@
                 </div>
                 <div class="trash-icon">
                   <hr *ngIf="i !== experienceBlocks.controls.length - 1" />
-                  <i
-                    class="pi pi-trash"
-                    style="font-size: 1.5rem"
-                    (click)="removeEducation(i)"
-                    pTooltip="Delete Above Education"
-                  ></i>
+
                 </div>
               </div>
 
@@ -359,29 +271,3 @@
     </div>
   </p-card>
 </div>
-
-<div class="container-fluid set_alignment" *ngIf="selected && !resumeTypeBuild">
-  <p-card [style]="{ width: '360px' }">
-
-    <ng-template pTemplate="header">
-      <i
-      class="pi pi-arrow-left "
-      style="font-size: 1.5rem;padding: 20px;cursor: pointer;"
-      (click)="toggle()"
-    ></i>
-      <img alt="Card" src="../../../assets/images/resume.svg" />
-    </ng-template>
-    <h4>Please upload your resume</h4>
-
-    <ng-template pTemplate="footer">
-      <input pInputText (change)="onFileSelected($event)" class="resumeText" type="file" id="file">
-      <button pButton (click)="displayPdf()" style="margin-top: 10px;" *ngIf="fileName != null">{{fileName}}</button>
-
-
-    </ng-template>
-
-
-</p-card>
-
-</div>
-

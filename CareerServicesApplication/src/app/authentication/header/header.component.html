@@ -7,7 +7,7 @@
     <li>
       <a [routerLink]="['/homepage']">Home</a>
     </li>
-    <li>
+    <li *ngIf="loggedInUser.userType != 'admin'">
       <a [routerLink]="['/userProfile']">Profile</a>
     </li>
     <li *ngIf="loggedInUser.userType == 'student'">

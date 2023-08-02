@@ -1,8 +1,8 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 
 import { User } from '../../models/user';
 import { MessageService } from 'primeng/api';
@@ -40,6 +40,27 @@ export class AccountService {
       }));
   }
 
+
+  sendMessage(phoneNumber: string, body1: string) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+
+
+    });
+
+    const body = new URLSearchParams();
+    body.set('recipientNumber', phoneNumber);
+    body.set('messageBody',body1);
+    // Set the recipient phone number in the request payload
+    this.http.post<any>('https://bazaar-frenchfry-6660.twil.io/testfunc', body, { headers }).subscribe(
+      (response) => {
+        console.log('SMS sent successfully!');
+      },
+      (error) => {
+        console.error('Failed to send SMS:', error);
+      }
+    );
+  }
 
   logout() {
     // remove user from local storage and set current user to null

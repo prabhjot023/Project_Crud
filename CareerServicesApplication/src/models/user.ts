@@ -10,5 +10,6 @@ export class User {
   companyAddress?: any;
   companyPhone?: any;
   desiredTitle?: any;
-  introduction?: any
+  introduction?: any;
+  default?:any;
 }
