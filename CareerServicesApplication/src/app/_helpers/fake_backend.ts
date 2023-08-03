@@ -124,7 +124,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       if (!isLoggedIn()) return unauthorized();
       let posts: any[] = JSON.parse(localStorage.getItem(postKey)!) || [];
 
-      const post = posts.find(x => x.postId === idFromUrl());
+      let post = posts.find(x => x.postId === idFromUrl());
       return ok(post);
     }
 

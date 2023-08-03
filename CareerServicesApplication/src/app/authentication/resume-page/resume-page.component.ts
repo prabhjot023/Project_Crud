@@ -225,7 +225,13 @@ export class ResumePageComponent implements OnInit {
 
 
     const file = event.target.files[0];
-    this.fileName = file.name;
+
+    if (file.size > 5242880) {
+      this.messageService.add({ severity: 'warn', summary: 'Document size must be under 5MB' });
+
+    }
+    else{
+      this.fileName = file.name;
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
@@ -259,7 +265,7 @@ export class ResumePageComponent implements OnInit {
         localStorage.setItem('uploadedResumes', JSON.stringify(resumes));
       }
     }
-
+  }
   }
 
 

@@ -169,6 +169,10 @@ export class HomePageComponent implements OnInit {
             }
         })
       }
+      else{
+        this.messageService.add({ severity: 'warn', summary: 'Please upload your resume first' });
+
+      }
     }
 
     if(type == 0)
@@ -198,6 +202,10 @@ export class HomePageComponent implements OnInit {
 
           }
       })
+    }
+    else{
+                  this.messageService.add({ severity: 'warn', summary: 'Please build your resume first' });
+
     }
     }
     }

@@ -1,23 +1,28 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AccountService } from '../accountService.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-post-page',
   templateUrl: './post-page.component.html',
-  styleUrls: ['./post-page.component.scss']
+  styleUrls: ['./post-page.component.scss'],
+  providers:[MessageService]
 })
 export class PostPageComponent {
   postData: any;
 
   usersData: any = [];
+  loggedInUser;
 
-  constructor(private router: Router, private accountService: AccountService) {
+  constructor(private router: Router, private accountService: AccountService,
+    private messageService : MessageService) {
 
 
 
     this.setData();
 
+    this.loggedInUser = JSON.parse(localStorage.getItem('user')!);
   }
 
   setData() {
@@ -30,7 +35,7 @@ export class PostPageComponent {
     this.postData = posts.find((x: any) => x.postId == postData1.postId);
 
     let users = JSON.parse(localStorage.getItem("Users")!);
-    if (this.postData.userId.length > 0) {
+    if (this.postData.userId && this.postData.userId.length > 0) {
       this.postData.userId.forEach((elem: any) => {
 
         let oj = users.find((x: any) => x.id == elem.userId);
@@ -99,6 +104,14 @@ export class PostPageComponent {
 
 
 
+    if(this.loggedInUser.userType == "admin")
+    {
+      this.messageService.add({  severity: 'warn', summary: 'Access denied to perform this action'});
+
+    }
+    else{
+
+
 
 
 
@@ -155,6 +168,8 @@ export class PostPageComponent {
 
       previousData.push(obj)
 
+      this.messageService.add({  severity: 'success', summary: 'Success'});
+
       localStorage.setItem("notification", JSON.stringify(previousData));
 
 
@@ -172,6 +187,8 @@ export class PostPageComponent {
       }
 
       previous.push(obj);
+      this.messageService.add({  severity: 'success', summary: 'Success'});
+
       localStorage.setItem("notification", JSON.stringify(previous));
 
 
@@ -185,6 +202,7 @@ export class PostPageComponent {
     // this.getStatus();
 
     this.sendSms(data.phoneNumber, flag)
+  }
 
   }
   // getStatus()

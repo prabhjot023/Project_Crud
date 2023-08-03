@@ -106,7 +106,8 @@ export class AccountService {
   updatePost(id: string, params: any) {
 
         let allposts:any;
-        let flag;
+        let flag = false;
+        let flag1;
        allposts = JSON.parse(localStorage.getItem('Posts')!);
         allposts.forEach((elem:any)=>{
           if(elem.postId == id)
@@ -121,7 +122,7 @@ export class AccountService {
           flag = true;
         }
         else{
-          flag = false;
+          flag1 = false;
         }
       });
 
