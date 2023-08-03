@@ -61,6 +61,7 @@ bottom:   50px;
     display: flex;
     justify-content: space-around;
 }
+
 .custom-button{
     display: flex;
     flex-direction: column;
@@ -84,9 +85,11 @@ bottom:   50px;
     font-weight: bold;
     margin-top: 10px;
 }
+
 .custom-button-blue .button-text{
     color: white;
 }
+
 .custom-button:hover{
     transform: scale(1.1);
     cursor: pointer;
