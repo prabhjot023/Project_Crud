@@ -98,8 +98,8 @@
         <h4 class="modal-title">Select Resume</h4>
       </div>
       <div class="modal-body">
-        <p-button (click)="applyJob(selctedJob,0)"><i class="pi pi-file-edit"></i>BuildIn Resume</p-button>
-        <p-button (click)="applyJob(selctedJob,1)"><i class="pi pi-upload"></i>Uploaded Resume</p-button>
+        <button (click)="applyJob(selctedJob,0)" class="custom-button"><i class="pi pi-file-edit" style="font-size: 1.5rem"></i><span class="button-text">BuildIn Resume</span></button>
+        <button (click)="applyJob(selctedJob,1)" class="custom-button custom-button-blue"><i class="pi pi-upload" style="font-size: 1.5rem;color: white;"></i><span class="button-text">Uploaded<br>Resume</span></button>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" (click)="closePopup()">
