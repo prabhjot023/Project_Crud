@@ -361,12 +361,12 @@
 </div>
 
 <div class="container-fluid set_alignment" *ngIf="selected && !resumeTypeBuild">
-  <p-card [style]="{ width: '360px' }">
+  <p-card [style]="{ width: '360px', position: 'relative' }">
 
     <ng-template pTemplate="header">
       <i
       class="pi pi-arrow-left "
-      style="font-size: 1.5rem;padding: 20px;cursor: pointer;"
+      style="font-size: 1.5rem;padding: 20px;cursor: pointer; position: absolute; left: 0;"
       (click)="toggle()"
     ></i>
       <img alt="Card" src="../../../assets/images/resume.svg" />

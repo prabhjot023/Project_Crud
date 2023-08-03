@@ -56,3 +56,33 @@ p-card{
 right:    50px;
 bottom:   50px;
 }
+
+.modal-body{
+    display: flex;
+    justify-content: space-around;
+}
+.custom-button{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px;
+    background-color: #fff;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    width: 150px;
+    line-height: 1.2;
+    border-radius: 10px;
+}
+
+.custom-button-blue{
+    background-color: #3B82F6;
+}
+
+.custom-button .button-text{
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+.custom-button-blue .button-text{
+    color: white;
+}
