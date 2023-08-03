@@ -100,35 +100,40 @@ export class PostPageComponent {
 
 
 
-    this.sendSms(data.phoneNumber, flag)
 
 
 
     let post = JSON.parse(localStorage.getItem('Posts')!);
+    let indexToUpdate =post.findIndex((item:any) => item.postId == this.postData.postId);
+
     post.forEach((elem: any) => {
       let count1 = 0;
+      if(elem.postId == this.postData.postId)
+      {
       if (elem.userId && elem.userId.length > 0) {
 
-        let obj: { userId: any; isAccepted: boolean; }[] = [];
         let count = 0;
-        elem.userId.forEach((element: any) => {
+        elem.userId.forEach((item: any) => {
 
-          if (element.userId == data.id) {
-            post[count1].userId[count].isAccepted = flag
+          if (item.userId == data.id) {
+            post[indexToUpdate].userId[count].isAccepted = flag
           }
 
           count++;
 
         });
 
-        count1++;
 
 
 
         localStorage.setItem('Posts', JSON.stringify(post));
         this.setData();
       }
+    }
+
+    count1++;
     })
+
 
 
     if (localStorage.getItem("notification")) {
@@ -178,6 +183,9 @@ export class PostPageComponent {
 
 
     // this.getStatus();
+
+    this.sendSms(data.phoneNumber, flag)
+
   }
   // getStatus()
   // {

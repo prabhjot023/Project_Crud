@@ -62,7 +62,7 @@ export class HomePageComponent implements OnInit {
 
 
 
-      if(elem.userId.length>0)
+      if(elem.userId && elem.userId.length>0)
       {
         if(elem.userId.find((x:any) => x.userId === this.loggedInUser.id))
         {
