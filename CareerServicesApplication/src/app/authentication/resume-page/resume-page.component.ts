@@ -165,7 +165,9 @@ export class ResumePageComponent implements OnInit {
         next: () => {
 
           // this.messageService.clear();
+          let resume = JSON.parse(localStorage.getItem('Resumes')!) || [];
 
+          this.loggedInUserResume = resume.find((x: any) => x.id === this.loggedInUser.id);
           this.messageService.add({ severity: 'success', summary: 'Success' });
           //this.ngOnInit();
           this.selected = false;

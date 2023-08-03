@@ -43,6 +43,8 @@ export class AddAPostComponent {
   ngOnInit(): void {
     this.addPostForm = this.formBuilder.group({
       companyName: [ this.loggedInUser.companyName || '', Validators.required],
+      jobID: [ '', Validators.required],
+
       job_title: [ '', Validators.required],
       job_desc: ['', [Validators.required]],
       loc: [this.loggedInUser.companyAddress || '', [Validators.required]],
@@ -50,6 +52,7 @@ export class AddAPostComponent {
 
       id: this.loggedInUser.id,
       postId:[''],
+      userId:[[]]
 
     });
   }

@@ -48,15 +48,20 @@ export class EditPostComponent {
         this.postData = x;
         this.editPostForm = this.formBuilder.group({
           companyName: [this.postData.companyName ? this.postData.companyName : '', Validators.required],
+          jobID: [this.postData.jobID ? this.postData.jobID : '', Validators.required],
+
           job_title: [this.postData.job_title ? this.postData.job_title : '', Validators.required],
           job_desc: [this.postData.job_desc ? this.postData.job_desc : '', [Validators.required]],
           loc: [this.postData.loc ? this.postData.loc : '', [Validators.required]],
           phone: [this.postData.phone ? this.postData.phone : '', [Validators.required]],
 
           id: this.loggedInUser.id,
-          postId: [this.postData.postId ? this.postData.postId : '']
+          postId: [this.postData.postId ? this.postData.postId : ''],
+          userId:[this.postData.userId ? this.postData.userId :[]]
+
 
         });
+        this.editPostForm.controls['jobID'].disable();
       });
 
 
@@ -82,6 +87,9 @@ export class EditPostComponent {
     let flag = this.accountService.updatePost(this.postId, this.editPostForm.value);
 
     if (flag) {
+      setTimeout(()=>{
+        this.router.navigate(['/homepage']);
+      },1000)
       this.messageService.add({ severity: 'success', summary: 'Post updated successfuly' });
 
     }
