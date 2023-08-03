@@ -42,10 +42,13 @@ export class EditPostComponent {
   }
 
   ngOnInit(): void {
-    this.accountService.getById(this.postId)
-      .pipe(first())
-      .subscribe(x => {
-        this.postData = x;
+
+
+        let posts: any[] = JSON.parse(localStorage.getItem('Posts')!) || [];
+
+        let post = posts.find(x => x.postId == this.postId);
+        this.postData = post;
+
         this.editPostForm = this.formBuilder.group({
           companyName: [this.postData.companyName ? this.postData.companyName : '', Validators.required],
           jobID: [this.postData.jobID ? this.postData.jobID : '', Validators.required],
@@ -61,8 +64,8 @@ export class EditPostComponent {
 
 
         });
-        this.editPostForm.controls['jobID'].disable();
-      });
+        //this.editPostForm.controls['jobID'].disable();
+
 
 
   }
