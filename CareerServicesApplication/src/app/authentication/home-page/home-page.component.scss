@@ -72,6 +72,7 @@ bottom:   50px;
     width: 150px;
     line-height: 1.2;
     border-radius: 10px;
+    transition: transform 0.5s;
 }
 
 .custom-button-blue{
@@ -85,4 +86,9 @@ bottom:   50px;
 }
 .custom-button-blue .button-text{
     color: white;
+}
+
+.custom-button:hover{
+    transform: scale(1.1);
+    cursor: pointer;
 }
