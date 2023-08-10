@@ -17,6 +17,10 @@ p-card:hover {
   cursor: pointer;
 }
 
+.custom-button:hover{
+  transform: scale(1.1);
+  cursor: pointer;
+}
 .cards-small{
   display: flex;
   flex-wrap: wrap;
@@ -72,6 +76,7 @@ bottom:   50px;
     width: 150px;
     line-height: 1.2;
     border-radius: 10px;
+    transition: transform 0.5s;
 }
 
 .custom-button-blue{
